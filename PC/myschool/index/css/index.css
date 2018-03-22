@@ -1,13 +1,64 @@
-*{
-    margin: 0;
-    padding: 0;
+.carousel{
+    height: 380px;
+    background: linear-gradient(to bottom, #f4f2f4 0%,#ffffff 100%);
 }
-.topBar{
-    width: 100%;
-    height: 70px;
-    background-color: #fe3;
+#myCarousel{
+    margin-top: 25px;
+    box-shadow: 0px 20px 20px #dcd5dc;
 }
-.logo{
+.content-type{
+    margin-top:70px;
     text-align: center;
-    font-size: 30px;
+    /*height: 400px;*/
+
+}
+.type{
+    background-color: #f4f2f4 ;
+}
+.content-type-header{
+    margin-top: 30px;
+}
+.content-type-header em{
+    font-size: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+
+}
+.content-type-list{
+    display: flex;
+    flex-direction: row;
+    /*align-content: center;*/
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+.list{
+    margin-top: 30px;
+}
+.listcontent{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.listcontent img{
+    width:90%;
+    height: 100px;
+    border-radius: 5%;
+}
+.listcontent h4{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    font-size: 16px;
+    letter-spacing:1px;
+    line-height: 18px;
+}
+.listcontent span{
+    color: #ae9eae;
+    margin-left: 5%;
+}
+.listcontent span img{
+    width: 16px;
+    height: 16px;
+
 }
