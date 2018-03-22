@@ -64,7 +64,7 @@
                   })
 
                   $('.save-btn').click(function () {
-                      var $cid = $(this).parent().prev().html()
+                      var $cid = $(this).parent().parent().prev().html()
                       var $catename = $(this).prev().val()
                       var that = $(this)
                       $.get('/updateCate', {cid:$cid,catename:$catename},function(data){
@@ -75,6 +75,8 @@
                               that.parent().hide()
                               alert('修改成功!')
                           }else{
+                              that.parent().prev().show()
+                              that.parent().hide()
                               alert('修改失败!')
                           }
                       })
@@ -117,14 +119,14 @@
 
     <!--script for this page-->
     
-  <script>
-      //custom select box
+  <!--<script>-->
+      <!--//custom select box-->
 
-      $(function(){
-          $('select.styled').customSelect();
-      });
+      <!--$(function(){-->
+          <!--$('select.styled').customSelect();-->
+      <!--});-->
 
-  </script>
+  <!--</script>-->
 
   </body>
 </html>
