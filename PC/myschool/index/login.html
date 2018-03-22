@@ -9,39 +9,190 @@
     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/vue/2.4.4/vue.js"></script>
     <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/index.css">
 </head>
 
 <body>
 <div id="app">
     <headerLogin-component></headerLogin-component>
+    <div class="carousel">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div id="myCarousel" class="carousel slide">
+                    <!-- 轮播（Carousel）指标 -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                    </ol>
+                    <!-- 轮播（Carousel）项目 -->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="https://img1.sycdn.imooc.com/5ab1cc680001fcfe09360316.jpg" alt="First slide" width="100%">
+                        </div>
+                        <div class="item">
+                            <img src="https://img1.sycdn.imooc.com/5a9cd8b50001056209360316.jpg" alt="Second slide">
+                        </div>
+                        <div class="item">
+                            <img src="https://img1.sycdn.imooc.com/5aa667700001e83c09360316.jpg" alt="Third slide">
+                        </div>
+                    </div>
+                    <!-- 轮播（Carousel）导航 -->
+                    <a class="carousel-control left" href="#myCarousel"
+                       data-slide="prev">&lsaquo;
+                    </a>
+                    <a class="carousel-control right" href="#myCarousel"
+                       data-slide="next">&rsaquo;
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
+
+
+    <div class="content">
+        <!--热门推荐开始-->
+        <div class="content-type">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10 ">
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4 ">
+                            <div class="row">
+                                <div class="col-md-12 content-type-header">
+                                    <img src="public/images/icon1.png" alt=""><em>热</em><em>门</em><em>推</em><em>荐</em>
+                                    <img src="public/images/icon1.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+                    <div class="row">
+                        <div class="content-type-list col-md-12">
+                            <div class="listcontent" v-for="item in log">
+                                <a href="./login.html">
+                                    <img src="https://img3.sycdn.imooc.com/szimg/5a308c9400011c1305400300.jpg" alt="">
+                                    <h4>
+                                        {{item.h4}}
+                                    </h4>
+                                </a>
+                                <span>{{item.span1}}</span>
+                                <span>{{item.span2}}</span>
+                                <span><img src="public/images/icon4.png" alt="">{{item.nums}}</span>
+                                <p>{{item.descript}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+        <!--热门推荐结束-->
+
+        <!--最新发表开始-->
+        <div class="content-type type">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10 ">
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4 ">
+                            <div class="row">
+                                <div class="col-md-12 content-type-header">
+                                    <img src="public/images/icon2.png" alt=""><em>最</em><em>新</em><em>发</em><em>表</em>
+                                    <img src="public/images/icon2.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+                    <div class="row">
+                        <div class="content-type-list col-md-12">
+                            <div class="listcontent" v-for="(item,index) in log">
+                                <div class="list">
+                                    <a href="./login.html">
+                                        <img src="https://img3.sycdn.imooc.com/szimg/5a308c9400011c1305400300.jpg" alt="">
+                                        <h4>
+                                            {{item.h4}}
+                                        </h4>
+                                    </a>
+                                    <span>{{item.span1}}</span>
+                                    <span>{{item.span2}}</span>
+                                    <span><img src="public/images/icon4.png" alt="">{{item.nums}}</span>
+                                    <p>{{item.descript}}</p>
+                                </div>
+                                <div class="list">
+                                    <a href="./login.html">
+                                        <img src="https://img3.sycdn.imooc.com/szimg/5a308c9400011c1305400300.jpg" alt="">
+                                        <h4>
+                                            {{item.h4}}
+                                        </h4>
+                                    </a>
+                                    <span>{{item.span1}}</span>
+                                    <span>{{item.span2}}</span>
+                                    <span><img src="public/images/icon4.png" alt="">{{item.nums}}</span>
+                                    <p>{{item.descript}}</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+
+        <!--最新发表结束-->
+
+
+        <!--文档模块开始-->
+        <div class="content-type">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10 ">
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4 ">
+                            <div class="row">
+                                <div class="col-md-12 content-type-header">
+                                    <img src="public/images/icon3.png" alt=""><em>文</em><em>档</em><em>学</em><em>习</em>
+                                    <img src="public/images/icon3.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+                    <div class="row">
+                        <div class="content-type-list col-md-12">
+                            <div class="listcontent" v-for="item in log">
+                                <a href="./login.html">
+                                    <img src="https://img3.sycdn.imooc.com/szimg/5a308c9400011c1305400300.jpg" alt="">
+                                    <h4>
+                                        {{item.h4}}
+                                    </h4>
+                                </a>
+                                <span>{{item.span1}}</span>
+                                <span>{{item.span2}}</span>
+                                <span><img src="public/images/icon4.png" alt="">{{item.nums}}</span>
+                                <p>{{item.descript}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+
+        <!--文档模块借速-->
+
+    </div>
 </div>
-<script src="js/headerlogin.js"></script>
-<!--<div class="topBar">-->
-    <!--<div class="row">-->
-        <!--<div class="col-md-3 logo">MySchool <small>.com</small></div>-->
-        <!--<div class="col-md-3">-->
-            <!--<ul class="nav nav-pills topBar-nav">-->
-                <!--<li ><a href="#">所有课程</a></li>-->
-                <!--<li><a href="#">视频课程</a></li>-->
-                <!--<li><a href="#">文档课程</a></li>-->
-            <!--</ul>-->
-        <!--</div>-->
-        <!--<div class="col-md-3">-->
-            <!--<input type="text" placeholder="搜索"  class="topBar-search"/>-->
-        <!--</div>-->
-        <!--<div class="col-md-3">-->
-            <!--<div class="row topBar-login">-->
-                <!--<div class="col-md-4">下载APP</div>-->
-                <!--<div class="coi-md-2">-->
-                    <!--<img src="./images/tt.png" alt="" class="attention">-->
-                <!--</div>-->
-                <!--<div class="col-md-2">-->
-                    <!--<img src="./images/1.jpg" alt="" class="logoico">-->
-                <!--</div>-->
-                <!--<div class="col-md-4"></div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
+<script src="./js/headerlogin.js"></script>
+
 </body>
 </html>
