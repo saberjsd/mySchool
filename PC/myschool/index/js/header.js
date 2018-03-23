@@ -33,42 +33,74 @@ new Vue({
                 span1:"实战",
                 span2:"高级",
                 sc:"./images/icon4.png",
-                nums:"456"
+                nums:"456",
+                descript:'这是一个学习视频'
             },
             {
                 h4:"Java企业级电商项目架构演进之路  Tomcat集群与Redis分布式",
                 span1:"实战",
                 span2:"高级",
                 sc:"./images/icon4.png",
-                nums:"456"
+                nums:"456",
+                descript:'这是一个学习视频'
             },
             {
                 h4:"Java企业级电商项目架构演进之路 ",
                 span1:"实战",
                 span2:"高级",
                 sc:"../images/icon4.png",
-                nums:"456"
+                nums:"456",
+                descript:'这是一个学习视频'
             },
             {
                 h4:"Java企业级电商项目架构演进之路  Tomcat集群与Redis分布式",
                 span1:"实战",
                 span2:"高级",
                 sc:"./images/icon4.png",
-                nums:"456"
+                nums:"456",
+                descript:'这是一个学习视频'
             },
             {
                 h4:"Java企业级电商项目架构演进之路 ",
                 span1:"实战",
                 span2:"高级",
                 sc:"./images/icon4.png",
-                nums:"456"
-            },
+                nums:"456",
+                descript:'这是一个学习视频'
+            }
+        ],
+        log1:[
             {
-                h4:"Java企业级电商项目架构演进之路  Tomcat集群与Redis分布式",
+                h4:"Java企业级电商项目架构演进之路 ",
                 span1:"实战",
                 span2:"高级",
                 sc:"./images/icon4.png",
-                nums:"456"
+                nums:"456",
+                descript:'这是一个学习视频'
+            },
+            {
+                h4:"Java企业级电商项目架构演进之路 ",
+                span1:"实战",
+                span2:"高级",
+                sc:"./images/icon4.png",
+                nums:"456",
+                descript:'这是一个学习视频'
+            },
+            {
+                h4:"Java企业级电商项目架构演进之路 ",
+                span1:"实战",
+                span2:"高级",
+                sc:"./images/icon4.png",
+                nums:"456",
+                descript:'这是一个学习视频'
+            },
+            {
+                h4:"Java企业级电商项目架构演进之路 ",
+                span1:"实战",
+                span2:"高级",
+                sc:"./images/icon4.png",
+                nums:"456",
+                descript:'这是一个学习视频'
             }
         ]
     }

@@ -43,28 +43,32 @@ Vue.component("headerlogin-component",{
                 span1:"实战",
                 span2:"高级",
                 src:"https://img3.sycdn.imooc.com/szimg/5a308c9400011c1305400300.jpg",
-                nums:"456"
+                nums:"456",
+                descript:'这是一个学习视频'
             },
             {
                 h4:"Java企业级电商项目架构演进之路  Tomcat集群与Redis分布式",
                 span1:"实战",
                 span2:"高级",
                 src:"https://img3.sycdn.imooc.com/szimg/5a308c9400011c1305400300.jpg",
-                nums:"456"
+                nums:"456",
+                descript:'这是一个学习视频'
             },
             {
                 h4:"Java企业级电商项目架构演进之路  Tomcat集群与Redis分布式",
                 span1:"实战",
                 span2:"高级",
                 src:"https://img3.sycdn.imooc.com/szimg/5a308c9400011c1305400300.jpg",
-                nums:"456"
+                nums:"456",
+                descript:'这是一个学习视频'
             },
             {
                 h4:"Java企业级电商项目架构演进之路  Tomcat集群与Redis分布式",
                 span1:"实战",
                 span2:"高级",
                 src:"https://img3.sycdn.imooc.com/szimg/5a308c9400011c1305400300.jpg",
-                nums:"456"
+                nums:"456",
+                descript:'这是一个学习视频'
             }
         ]
     }
