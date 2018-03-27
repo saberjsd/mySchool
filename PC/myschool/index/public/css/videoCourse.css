@@ -1,0 +1,127 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.nav-list li:nth-child(1){
+    color: #f32;
+}
+.top-bar{
+    height: 225px;
+    background-image: url("../images/videoCourseBg1.jpg");
+    text-align: center;
+    position: relative;
+}
+.top-bar-title{
+    /*margin-top: 20px;*/
+    color: white;
+    font-size: 36px;
+    position: absolute;
+    top:50px;
+    left:37%;
+    font-family: 华文行楷;
+    font-weight: 500;
+    /*margin-top: 50px;*/
+}
+.top-bar-box{
+    width: 470px;
+    color: #90bcd5;
+    font-size: 14px;
+    position: absolute;
+    top: 100px;
+    left: 33%;
+}
+.top-bar-box span{
+    margin-left:1%;
+    margin-right:1%;
+}
+.top-nav{
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    /*left: 10%;*/
+}
+.top-nav ul{
+    margin-top: 2px;
+    margin-bottom: 0;
+}
+.top-nav ul li{
+    cursor:pointer;
+    width: 13%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.top-nav li{
+    font-size: 18px;
+    color: white;
+    /*text-decoration: none;*/
+}
+/*.top-nav li:hover{*/
+    /*height: 60px;*/
+    /*background-color: white;*/
+    /*text-align: center;*/
+    /*line-height: 70px;*/
+    /*background-color: rgba(255,255,255,0.3);*/
+    /*border-radius: 10px 10px 0 0 ;*/
+/*}*/
+.top-nav li:active{
+    height: 60px;
+    background-color: white;
+    text-align: center;
+    line-height: 70px;
+    border-radius: 10px 10px 0 0 ;
+}
+.top-nav a{
+    text-decoration: none;
+}
+.active{
+    height: 60px;
+    background-color: white;
+    text-align: center;
+    line-height: 70px;
+    border-radius: 10px 10px 0 0 ;
+}
+.active a{
+    color: black;
+}
+.movies{
+    margin-top: 50px;
+    margin-bottom: 140px;
+}
+.movie-list{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    /*margin-bottom: 10px;*/
+}
+.movie-list-box{
+    width: 25%;
+    margin-top: 20px;
+}
+.movie-list-box a{
+    text-decoration: none;
+    color: black;
+}
+.movie-list-box a:hover{
+    color:rgb(240,20,20) ;
+}
+.movie-list-box h4{
+    font-size: 16px;
+}
+.movie-list-box span,.movie-list-box p{
+    margin-top: 5px;
+    margin-right:10px;
+    color: #ae9eae;
+    font-size: 14px;
+}
+.movie-list-box p{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; //文本行数
+}
+.movie-list-img img{
+    width: 90%;
+    border-radius: 3%;
+}
