@@ -2,6 +2,7 @@
 var express = require('express');
 var session = require('express-session');
 var bodyParser = require('body-parser');
+var md5 = require('md5');
 var app = express();
 
 // 创建 application/x-www-form-urlencoded 编码解析
@@ -21,6 +22,16 @@ app.use(session({
     cookie: {maxAge: 1000*60*60*24 },    //设置maxAge单位是ms，设置时间后session和相应的cookie失效过期
 }));
 
+app.get('/login.html',function (req,res) {
+    // 消除当前session
+    req.session.destroy(function(err){
+        if(!err){
+            res.render('login',{res:''});
+        }
+    })
+
+});
+
 // 验证是否登录
 app.get('*', function(req, res, next) {
     if(!req.session.username){
@@ -31,15 +42,7 @@ app.get('*', function(req, res, next) {
 });
 
 
-app.get('/login.html',function (req,res) {
-    // 消除当前session
-    req.session.destroy(function(err){
-        if(!err){
-            res.render('login',{res:''});
-        }
-    })
 
-});
 
 // 处理登录验证
 var LoginController = require('./controller/LoginController.js');
