@@ -1,8 +1,5 @@
 function UserDao() {
-
-    /**
-     * 数据库连接
-     */
+// 数据初始化，连接数据库
     var connection;
     this.init=function () {
         //1，调用MySQL模块
@@ -19,83 +16,66 @@ function UserDao() {
         //3,连接
         connection.connect();
     }
-    //处理登录
-    this.login=function (username,call) {
-        var  sql = 'SELECT * FROM administrators WHERE username = "'+username+'"';
+    //用户列表
+    this.userList=function (call) {
+        var  sql = 'SELECT uid,username,sex,province,city,role,status FROM userinfo';
         // console.log(sql)
         connection.query(sql,function (err, result) {
             call(err, result);
         });
     }
-    //获取栏目
-    this.getCate = function(isMenu,call){
-        var sql ;
-        if(isMenu){
-            sql = 'SELECT * FROM cate WHERE level = 1 AND status = 1';
-        }else{
-            sql = 'SELECT * FROM cate WHERE level = 2 AND status = 1';
-        }
+    this.searchName=function (nameKey,call) {
+        var  sql = 'SELECT uid,username,sex,province,city,role,status FROM userinfo WHERE username LIKE "%'
+            +nameKey+'%"';
+        // console.log(sql)
         connection.query(sql,function (err, result) {
             call(err, result);
         });
     }
-    // 修改栏目
-    this.updateCate = function(cid,cname,call){
-        var sql = 'UPDATE cate SET catename ="'+cname+'" WHERE cid='+cid
+    this.searchRole=function (roleKey,call) {
+        var sql = 'SELECT uid,username,sex,province,city,role,status FROM userinfo WHERE role =' +roleKey;
+        // console.log(sql)
         connection.query(sql,function (err, result) {
             call(err, result);
         });
     }
-    //删除栏目
-    this.delCate = function(cid,call){
-        var sql = 'UPDATE cate SET status =0 WHERE cid='+cid;
+    this.searchStatus=function (statusKey,call) {
+        var sql = 'SELECT uid,username,sex,province,city,role,status FROM userinfo WHERE status =' +statusKey;
+        // console.log(sql)
+        connection.query(sql,function (err, result) {
+            call(err, result);
+        });
+    }
+
+
+
+    //重置密码
+    this.resetPwd = function(uid,call){
+        var sql = "UPDATE userinfo SET passwd='e10adc3949ba59abbe56e057f20f883e' WHERE uid="+uid;
         console.log(sql)
+        connection.query(sql,function (err, data) {
+            call(err,data)
+        });
+    }
+    // 修改状态
+    this.setUserInfo = function(bd,call){
+        var sql = "UPDATE userinfo SET role="+bd.role+",status="+bd.status+" WHERE uid="+bd.uid;
+        console.log(sql)
+        connection.query(sql,function (err, data) {
+            call(err,data)
+        });
+    }
+
+    //删除
+    this.delUser = function(uid,call){
+        var sql = 'DELETE FROM userinfo WHERE uid='+uid;
+        // console.log(sql)
         connection.query(sql,function (err, result) {
             call(err, result);
         });
     }
-    // /*通过name获得用户*/
-    // this.queryByName=function (name,call) {
-    //     var sql = "select * from users where name = '"+name+"'";
-    //     /**
-    //      *query，mysql语句执行的方法
-    //      * 1，userAddSql编写的sql语句
-    //      * 2，function (err, result)，回调函数，err当执行错误时，回传一个err值，当执行成功时，传回result
-    //      */
-    //
-    //     console.log(sql);
-    //     connection.query(sql,function (err, result) {
-    //         if(!err){
-    //             call(result);
-    //         }else{
-    //             console.log('[INSERT ERROR] - ',err.message);
-    //             return;
-    //         }
-    //     });
-    // }
-    
-    // this.insert= function (name,email,passwd,call) {
-    //
-    //
-    //     //3,编写sql语句
-    //     var  userAddSql = 'INSERT INTO users(name,email,passwd) VALUES(?,?,?)';
-    //     var  userAddSql_Params = [name,email,passwd];
-    //     //4,进行插入操作
-    //     /**
-    //      *query，mysql语句执行的方法
-    //      * 1，userAddSql编写的sql语句
-    //      * 2，userAddSql_Params，sql语句中的值
-    //      * 3，function (err, result)，回调函数，err当执行错误时，回传一个err值，当执行成功时，传回result
-    //      */
-    //     connection.query(userAddSql,userAddSql_Params,function (err, result) {
-    //         if(!err){
-    //             console.log(result);
-    //             call();
-    //         }else{
-    //             console.log(err);
-    //         }
-    //     });
-    //   //5,连接结束
+
+
 
     this.end=function () {
         connection.end();

@@ -36,7 +36,7 @@
 	  <div id="login-page">
 	  	<div class="container">
 	  	
-		  <form id="form" class="form-login" action="tologin" method="post" >
+		  <form id="form" class="form-login" action="loginCheck" method="post" >
 			<h2 class="form-login-heading">登录</h2>
 			<div class="login-wrap">
 				<input type="text" id="username1" name="username" class="form-control" placeholder="User ID" autofocus>
@@ -115,7 +115,7 @@
 	  <script>
           $('#loginBtn').click(check)
           function check(){
-              console.log(333)
+              // console.log(333)
               if($.trim($('#username1').val()) ==''){
                   $('.user').html('用户名不能为空!')
                   return false;

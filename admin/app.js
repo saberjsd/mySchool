@@ -1,6 +1,6 @@
 //引入express模块
 var express = require('express');
-var UserDao = require('./dao/UserDao');
+var UserDao = require('./dao/LoginDao');
 //获得express对象
 var app = express();
 //获得body-parser模块

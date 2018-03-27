@@ -2,7 +2,6 @@
 var express = require('express');
 var session = require('express-session');
 var bodyParser = require('body-parser');
-var UserDao = require('./dao/UserDao');
 var app = express();
 
 // 创建 application/x-www-form-urlencoded 编码解析
@@ -31,10 +30,6 @@ app.get('*', function(req, res, next) {
     next();
 });
 
-// 数据初始化，连接数据库
-var dao = new UserDao();
-dao.init();
-
 
 app.get('/login.html',function (req,res) {
     // 消除当前session
@@ -45,28 +40,11 @@ app.get('/login.html',function (req,res) {
     })
 
 });
-// 处理登录验证
-app.post('/tologin',urlencodedParser, function (req, res) {
-    var username = req.body.username;
-    var passwd   = req.body.passwd;
-        // if(username)
-    dao.login(username,function (err, data) {
-        // console.log(data)
-        if(data.length != 0){
-            // 查询到用户
-            if(passwd == data[0].passwd){
-                // 登录成功后保存用户名到session
-                req.session.username = username;
-                res.render('index',{pageMenu:'index',page:''});
-            }else{
-                res.render('login',{res:"passwordError"})
-            }
-        }else {
-            res.render('login',{res:"usernameError"})
-        }
-    })
 
-})
+// 处理登录验证
+var LoginController = require('./controller/LoginController.js');
+app.post('/loginCheck',urlencodedParser,LoginController.loginCheck );
+
 // 主页
 app.get('/',function (req,res) {
     res.render('index',{pageMenu:'index',page:''});
@@ -75,56 +53,57 @@ app.get('/index.html',function (req,res) {
     res.render('index',{pageMenu:'index',page:''});
 });
 
-// 栏目信息
-app.get('/cateList',function (req, res) {
-    var result = {
-        pageMenu:'cate',
-        page:'cateList'
-    };
-    dao.getCate(true,function (err1,data1) {
-        if(!err1){
-            result.cateMenu = data1
-            dao.getCate(false,function(err2,data2){
-                if(!err2){
-                    result.cateList = data2
-                    res.render('cateList',result)
-                }
-            })
 
-        }
-    })
-
-})
+//=============栏目管理=============
+// 查询栏目信息
+var CateController = require('./controller/CateController');
+app.get('/cateList',CateController.cateList)
 //修改栏目
-app.get('/updateCate',function(req,res){
-    var cid = req.query.cid
-    var cname = req.query.catename
-    dao.updateCate(cid,cname,function(err,data){
-        if(!err){
-            res.send({"res":"update_ok"})
-        }else {
-            res.send({"res":"update_fail"})
-        }
-    })
-})
+app.get('/updateCate',CateController.updateCate)
 //删除栏目
-app.get('/delCate',function(req,res){
-    var cid = req.query.cid
-    dao.delCate(cid,function(err,data){
-        if(!err){
-            res.send({"res":"del_ok"})
-        }else {
-            res.send({"res":"del_fail"})
-        }
-    })
-})
+app.get('/delCate',CateController.delCate)
 //添加栏目
-app.get('/cateAdd',function(req,res){
-    res.render('cateAdd',{pageMenu:'cate',page:'cateAdd'})
-})
+// var cateMenu1 = null;
+app.get('/cateAdd',CateController.cateAddGET)
+// 添加栏目信息
+app.post('/cateAdd',urlencodedParser,CateController.cateAddPOST)
+
+
+//=========课程管理========
+var CourseController = require('./controller/CourseController');
+app.get('/courseList',CourseController.courseList)
+//要修改的课程展示
+app.get('/courseItem',CourseController.courseItem)
+app.post('/updateCourse',urlencodedParser,CourseController.updateCourse)
+//课程添加
+// 获取栏目
+app.get('/getCourseMenu',CourseController.getCourseMenu)
+app.post('/addCourse',urlencodedParser,CourseController.addCourse)
+// 删除课程
+app.get('/delCourse',CourseController.delCourse)
+// 课程详情
+app.get('/courseDetail',CourseController.courseDetail)
+//获取章节详情
+app.get('/getChapter',CourseController.getChapter)
+app.post('/updateChapter',urlencodedParser,CourseController.updateChapter)
+app.post('/addChapter',urlencodedParser,CourseController.addChapter)
+//删除
+app.get('/delChapter',CourseController.delChapter)
 
 
 
+//==============用户管理===========
+var UserController = require('./controller/UserController');
+// 展示列表
+app.get('/userList',UserController.userList);
+// 重置密码
+app.get('/resetPwd',UserController.resetPwd);
+// 修改状态
+app.post('/setUserInfo',urlencodedParser,UserController.setUserInfo);
+//删除
+app.get('/delUser',UserController.delUser)
+
+//===监听端口===
 var server = app.listen(8080,function(){
     console.log('http://localhost:8080')
 })
