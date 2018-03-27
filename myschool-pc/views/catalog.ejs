@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <script src="https://cdn.bootcss.com/vue-resource/1.5.0/vue-resource.js"></script>
+    <% course1.forEach(function (course1) { %>
+    <title><%= course1.title%></title>
+    <link href="css/catalog.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+<div class="head">
+    <div class="head_box">
+        <!--<div class="title_catalog">
+            <a href="#">课程</a>\<a href="#">前段开发</a>\<a href="#">Bootsrap</a>\<a href="#">bootstrap快速入门</a>
+        </div>-->
+        <div class="title"><%= course1.title%></div>
+        <div class="start">
+        <div class="start_learning">
+            <a class="btn1" href="#">开始学习</a>
+            <div class="course_introduction">
+                 <div class="number">
+                     <p>学习人数</p>
+                     <h4><%= course1.collection%></h4>
+                 </div>
+                <div class="scope">
+                    <p>难度级别</p>
+                    <h4>高级</h4>
+                </div>
+                <div class="scope">
+                    <p>课程时长</p>
+                    <h4>2小时5分</h4>
+                </div>
+                <div class="scope">
+                    <p>综合评分</p>
+                    <h4>9.6</h4>
+                </div>
+            </div>
+        </div>
+            <div class="icon_box">
+                <div class="white">
+                    <img src="images/wx.png">
+                </div>
+                <div class="white">
+                    <img src="images/QQ%20.png">
+                </div>
+                <div class="white">
+                    <img src="images/xl.png">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="body">
+    <div class="left">
+        <div class="synopsis"><%= course1.description%></div>
+        <% })%>
+        <div class="taber">
+            <button type="button" class="btn" style="color: red;">目录</button>
+            <button type="button" class="btn">评论</button>
+        </div>
+        <div class="list_box">
+        <div class="chapter">
+            <div class="introduction">
+                <div class="chapter_icon">
+                    <img src="images/目录.png">
+                </div>
+
+                <h3>课程介绍</h3>
+            </div>
+            <% courseitem.forEach(function (list) { %>
+            <a href="video22?id=<%= list.id%>" class="course_section">
+                <div class="course_title">
+                    <div class="arrow">
+                    <img src="images/右箭头.png">
+                    </div>
+                    <div><%= list.title%></div>
+                </div>
+            </a>
+            <% })%>
+
+        </div>
+
+
+        </div>
+
+        <div class="list_box" style="display: none;">
+            <% queryCommentUser.forEach(function (comment) { %>
+            <div class="comment">
+                <div class="head_portrait">
+                    <img src="<%= comment.photo%>">
+                </div>
+                <div class="comment_right">
+                    <h4><%= comment.username%></h4>
+                    <p><%= comment.content%></p>
+                    <div>
+                        <span class="time">时间：<span><%= comment.creatTime.toLocaleString()%></span></span>
+                        <span class="source">源自：<span>6-1课程总结</span></span>
+                        <div class="zan">
+                            <span>举报</span>
+                            <div class="fabulous">
+                                <div>
+                                    <img src="images/赞.png">
+                                </div>
+                                <span><%= comment.zan%></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% })%>
+
+        </div>
+    </div>
+    <div class="right">
+        <h4>讲师风采</h4>
+        <div class="teacher">
+            <% userinfoSingle.forEach(function (userinfoSingle) {%>
+            <img src="images/head.jpg">
+            <div class="teacher_info">
+                <h4><%= userinfoSingle.username%></h4>
+                <span><%= userinfoSingle.position%></span>
+            </div>
+        </div>
+        <div class="top_arrow">
+            <img src="images/上箭头.png">
+        </div>
+        <div class="course_info">
+            <h5>基本信息</h5>
+            <p class="notice"><%= userinfoSingle.autograph%></p>
+        </div>
+        <%})%>
+    </div>
+</div>
+<div class="foot">
+    <div class="foot_box">
+        <div class="foot_left">
+        <div class="enterprise_nav">
+            <ul class="enterprise_ul">
+                <li>网站首页</li>
+                <li>企业合作</li>
+                <li>人才招聘</li>
+                <li>联系我们</li>
+                <li>讲师招募</li>
+                <li>常见问题</li>
+                <li>意见反馈</li>
+                <li>幕课大学</li>
+                <li>友情链接</li>
+            </ul>
+        </div>
+        <p>Copyright © 2018 imooc.com All Rights Reserved | 京ICP备 12003892号-11</p>
+        </div>
+        <div class="foot_right">
+            <div class="foot_icon"><img src="images/wx背景透明.png"></div>
+            <div class="foot_icon"><img src="images/新浪.png"></div>
+            <div class="foot_icon"><img src="images/qq背景透明.png"></div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="js/catalog.js"></script>
+
+</html>

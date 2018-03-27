@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>allClass</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.js"></script>
+    <script src="https://cdn.bootcss.com/vue-resource/1.5.0/vue-resource.js"></script>
+    <link rel="stylesheet" href="css/course.css">
+</head>
+<body>
+<div id="app">
+     <%include headerBlack.ejs%>
+    <div class="guide">
+
+        <!--一级标题开始-->
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="guide-direction">
+                <ul class="list-inline">
+                    <span>方向：</span>
+                    <li class="action"><a href="">全部</a></li>
+                    <li  v-for="(item,index) in cateMenu" @click="cate1(item,index)" :id="item.cid">{{item.catename}}</li>
+                </ul>
+                </div>
+                <hr>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <!--一级标题结束-->
+
+        <!--二级标题开始-->
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="guide-classify">
+                    <ul class="list-inline">
+                        <span>分类：</span>
+                        <li class="action"><a href="">全部</a></li>
+                        <li v-for="(item,index) in cateList" @click="cate2(item,index)" >{{item.catename}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+
+    <!--二级标题结束-->
+    <!--详情内容开始-->
+    <div class="content">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="contents">
+                    <div class="col-md-12 content-list" v-for="(item,index) in cateMovie" v-if="index%5==0">
+                            <div class="content-list-box" >
+                                <a href="../login.html">
+                                    <div class="content-list-img">
+                                        <img src="https://img.mukewang.com/58cf6639000183f406000338-240-135.jpg" alt="" class="listcontent-img">
+                                    </div>
+                                    <h4>
+                                        {{item.title}}
+                                    </h4>
+                                </a>
+                                <span><img src="images/icon7.png" alt="">{{item.comment}}</span>
+                                <span><img src="images/icon4.png" alt="">{{item.collection}}</span>
+                                <p>{{item.description}}</p>
+                            </div>
+
+                        <div class="content-list-box" v-if="cateMovie[index+1]!=null">
+                            <a href="../login.html">
+                                <div class="content-list-img">
+                                    <img src="https://img.mukewang.com/58cf6639000183f406000338-240-135.jpg" alt="" class="listcontent-img">
+                                </div>
+                                <h4>
+                                    {{cateMovie[index+1].title}}
+                                </h4>
+                            </a>
+                            <span><img src="images/icon7.png" alt="">{{cateMovie[index+1].comment}}</span>
+                            <span><img src="images/icon4.png" alt="">{{cateMovie[index+1].collection}}</span>
+                            <p>{{cateMovie[index+1].description}}</p>
+                        </div>
+
+                        <div class="content-list-box" v-if="cateMovie[index+2]!=null">
+                            <a href="../login.html">
+                                <div class="content-list-img">
+                                    <img src="https://img.mukewang.com/58cf6639000183f406000338-240-135.jpg" alt="" class="listcontent-img">
+                                </div>
+                                <h4>
+                                    {{cateMovie[index+2].title}}
+                                </h4>
+                            </a>
+                            <span><img src="images/icon7.png" alt="">{{cateMovie[index+2].comment}}</span>
+                            <span><img src="images/icon4.png" alt="">{{cateMovie[index+2].collection}}</span>
+                            <p>{{cateMovie[index+2].description}}</p>
+                        </div>
+
+                        <div class="content-list-box" v-if="cateMovie[index+3]!=null">
+                            <a href="../login.html">
+                                <div class="content-list-img">
+                                    <img src="https://img.mukewang.com/58cf6639000183f406000338-240-135.jpg" alt="" class="listcontent-img">
+                                </div>
+                                <h4>
+                                    {{cateMovie[index+3].title}}
+                                </h4>
+                            </a>
+                            <span><img src="images/icon7.png" alt="">{{cateMovie[index+3].comment}}</span>
+                            <span><img src="images/icon4.png" alt="">{{cateMovie[index+3].collection}}</span>
+                            <p>{{cateMovie[index+3].description}}</p>
+                        </div>
+
+                        <div class="content-list-box" v-if="cateMovie[index+4]!=null">
+                            <a href="../login.html">
+                                <div class="content-list-img">
+                                    <img src="https://img.mukewang.com/58cf6639000183f406000338-240-135.jpg" alt="" class="listcontent-img">
+                                </div>
+                                <h4>
+                                    {{cateMovie[index+4].title}}
+                                </h4>
+                            </a>
+                            <span><img src="images/icon7.png" alt="">{{cateMovie[index+4].comment}}</span>
+                            <span><img src="images/icon4.png" alt="">{{cateMovie[index+4].collection}}</span>
+                            <p>{{cateMovie[index+4].description}}</p>
+                        </div>
+
+
+
+
+
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+    <!--详情内容结束-->
+</div>
+<script src="js/course.js"></script>
+</body>
+</html>

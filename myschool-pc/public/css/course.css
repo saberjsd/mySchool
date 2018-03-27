@@ -1,0 +1,87 @@
+.guide{
+    width: 100%;
+    /*height: 300px;*/
+    /*background-color: #f3f5f7;*/
+}
+.guide-direction span,.guide-classify span{
+    font-weight: 700;
+    margin-right: 20px;
+}
+.guide-direction ul li{
+    margin-top: 20px;
+    margin-right: 20px;
+    font-size: 14px;
+    line-height: 30px;
+}
+.guide-direction ul li a,.guide-classify ul li a{
+    text-decoration: none;
+    color: white;
+}
+.guide-classify ul li {
+    margin-right: 20px;
+    font-size: 14px;
+    line-height: 30px;
+    margin-bottom: 20px;
+}
+.guide-classify ul li:hover,.guide-direction ul li:hover{
+    cursor:pointer;
+    color:rgb(240,20,20) ;
+}
+.action a{
+    color: black;
+}
+ .action{
+        height: 30px;
+       background-color: black;
+       text-align: center;
+       border-radius: 3px;
+       color: white;
+}
+
+ .content{
+     background-color: #f0f2f5;
+     padding-bottom: 140px;
+     /*height: 600px;*/
+ }
+ .contents{
+     margin-top: 50px;
+     margin-bottom: 140px;
+ }
+ .content-list{
+     margin-top: 10px;
+     display: flex;
+     flex-direction: row;
+     align-content: center;
+     /*margin-bottom: 10px;*/
+ }
+ .content-list-box{
+     width: 20%;
+     margin-top: 20px;
+ }
+.content-list-box a{
+  text-decoration: none;
+    color: black;
+}
+.content-list-box a:hover{
+    color:rgb(240,20,20) ;
+}
+.content-list-box h4{
+    font-size: 16px;
+}
+.content-list-box span,.content-list-box p{
+    margin-top: 5px;
+    margin-right:10px;
+    color: #ae9eae;
+    font-size: 14px;
+}
+.content-list-box p{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; //文本行数
+}
+.content-list-img img{
+    width: 90%;
+    border-radius: 3%;
+}

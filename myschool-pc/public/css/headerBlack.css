@@ -1,0 +1,148 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.navbar-default{
+    height:75px;
+    margin-bottom: -10px;
+    background-color:#07111b;
+    align-content: center;
+}
+.navbar-header a{
+    margin-left: 10px;
+}
+.navbar-brand{
+    font-size: 27px;
+    margin-top: 10px;
+    color: white;
+    /*margin-left: 20px;*/
+}
+.nav-list{
+    font-size: 16px;
+    margin-top: 10px;
+    margin-left: 40px;
+}
+.nav-list li{
+    margin-left: 10px;
+}
+.nav-list li a:active{
+    color: white;
+}
+.navbar-left{
+    height: 48px;
+    padding: 17px 0;
+    color: white;
+    background-color: transparent!important;
+    font-size: 12px;
+    margin-left: 20px;
+    box-sizing: border-box;
+}
+.form-control{
+    border:none;
+    /*border-top-color:white;*/
+    /*outline:medium;*/
+    background-color: white;
+    /*border-bottom-color: #ae9eae;*/
+}
+.btn-default{
+    border: none;
+    margin-left: -40px;
+}
+.navbar-right li{
+    font-size: 16px;
+    margin-top: 10px;
+}
+.navbar-right img{
+    margin-right: 30px;
+}
+.tixing img{
+    margin-top: 15px;
+}
+.userInfo-box{
+    display: none;
+    width: 280px;
+    height: 230px;
+    z-index: 20;
+    background-color: white;
+    border-radius: 10px;
+    position: absolute;
+    top:60px;
+    right: 10px;
+
+}
+
+.header-img .userInfo-box-header img{
+    border-radius: 50%;
+    position: absolute;
+    top:20px;
+    left: 7%;
+}
+.header-img .userInfo-box-header h5{
+    font-size: 17px;
+    font-family: 微软雅黑;
+    color: rgb(7,17,47);
+    position: absolute;
+    top:25px;
+    left: 37%;
+}
+.header-img .userInfo-box-header a{
+    text-decoration: none;
+    color: black;
+}
+.header-img .userInfo-box-header .collection{
+    position: absolute;
+    top:60px;
+    left:37%;
+}
+.header-img .userInfo-box-header .collection span{
+    margin-right: 5px;
+    color: rgb(147,153,159);
+}
+.header-img .userInfo-box-content,.userInfo-box-content1{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+.header-img .userInfo-box-content{
+    position: absolute;
+    top:115px;
+    left: 7%;
+    line-height: 30px;
+    text-align: center;
+}
+.header-img .userInfo-box-content1{
+    position: absolute;
+    top:148px;
+    left: 7%;
+    line-height: 30px;
+    text-align: center;
+}
+.header-img .box1,.header-img .box2,.header-img .box3,.header-img .box4{
+    width: 120px;
+    height: 30px;
+    background-color: rgb(248,250,252);
+    margin-right: 3px;
+}
+.box1 a,.box2 a,.box3 a,.box4 a{
+    color: rgb(147,153,159) ;
+    text-decoration: none;
+}
+.box1 span,.box2 span,.box3 span ,.box4 span{
+    font-size: 14px;
+    margin-right: 50px;
+}
+.box1:hover,.box2:hover,.box3:hover,.box4:hover{
+    background-color: rgb(217,221,215);
+}
+.header-img .userInfo-box-footer{
+    position: absolute;
+    top:195px;
+    left: 7%;
+}
+.header-img .userInfo-box-footer a{
+    text-decoration: none;
+    color:rgb(147,153,159) ;
+}
+.header-img .userInfo-box-footer a:hover{
+    color: rgb(7,17,47);
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="css/video.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+<div class="window">
+    <div class="video">
+        <% cateMovieAll.forEach(function (cateMovieAll) {%>
+        <video src="<%= cateMovieAll.content%>" autoplay controls></video>
+        <%})%>
+    </div>
+    <div class="comment">
+        <div class="comment_title">评论</div>
+        <div class="comment_text">
+            <div class="head_and_input">
+                <img src="images/默认头像.png">
+                <input class="comment_input" placeholder="扯淡、吐槽、表扬、鼓励...想说啥就说啥">
+            </div>
+            <button class="comment_btn">发表评论</button>
+        </div>
+    </div>
+    <div class="list_box">
+        <% queryCommentUser.forEach(function (usercomment) {%>
+        <div class="comment1">
+            <div class="head_portrait">
+                <img src="<%= usercomment.photo%>">
+            </div>
+            <div class="comment_right">
+                <h4><%= usercomment.username%></h4>
+                <p><%= usercomment.content%></p>
+                <div>
+                    <span class="time">时间：<span><%= usercomment.creatTime.toLocaleString()%></span></span>
+                    <!--<span class="source">源自：<span>6-1课程总结</span></span>-->
+                    <div class="zan">
+                        <span>举报</span>
+                        <div class="fabulous">
+                            <div>
+                                <img src="images/赞.png">
+                            </div>
+                            <span><%= usercomment.zan%></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%})%>
+    </div>
+</div>
+<div class="foot">
+    <div class="foot_box">
+        <div class="foot_left">
+            <div class="enterprise_nav">
+                <ul class="enterprise_ul">
+                    <li>网站首页</li>
+                    <li>企业合作</li>
+                    <li>人才招聘</li>
+                    <li>联系我们</li>
+                    <li>讲师招募</li>
+                    <li>常见问题</li>
+                    <li>意见反馈</li>
+                    <li>幕课大学</li>
+                    <li>友情链接</li>
+                </ul>
+            </div>
+            <p>Copyright © 2018 imooc.com All Rights Reserved | 京ICP备 12003892号-11</p>
+        </div>
+        <div class="foot_right">
+            <div class="foot_icon"><img src="images/wx背景透明.png"></div>
+            <div class="foot_icon"><img src="images/新浪.png"></div>
+            <div class="foot_icon"><img src="images/qq背景透明.png"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

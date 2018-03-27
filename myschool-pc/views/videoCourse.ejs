@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.js"></script>
+    <script src="https://cdn.bootcss.com/vue-resource/1.5.0/vue-resource.js"></script>
+    <link rel="stylesheet" href="css/videoCourse.css">
+</head>
+<body>
+
+<div id="app">
+    <%include headerBlack.ejs%>
+
+    <!--顶部导航栏开始-->
+    <div class="top-bar">
+        <div class="top-bar-title">
+            <p >成长&nbsp;&nbsp;因陪伴不在孤单</p>
+        </div>
+        <div class="top-bar-box">
+            <span>课程体系化</span>
+            <em>/</em>
+            <span>学练测一体</span>
+            <em>/</em>
+            <span>视频不限期</span>
+            <em>/</em>
+            <span>服务随开随用</span>
+            <em>/</em>
+            <span>问答作业1v1</span>
+        </div>
+        <div class="top-nav">
+            <ul class="list-inline">
+                <li class="active"><a href="">全部</a></li>
+                <li v-for="(item,index) in navData" @click="changeNav(index)">{{item}}</li>
+            </ul>
+        </div>
+    </div>
+    <!--顶部导航栏结束-->
+
+    <!--视频课程详情内容开始-->
+    <div class="content">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="movies">
+                        <div class="col-md-12 movie-list" v-for="(item,index) in vedioCourse" v-if="index%4==0">
+                            <div class="movie-list-box" >
+                                <a href="../login.html">
+                                    <div class="movie-list-img">
+                                        <img src="https://img.mukewang.com/58cf6639000183f406000338-240-135.jpg" alt="" >
+                                    </div>
+                                    <h4>
+                                        {{item.title}}
+                                    </h4>
+                                </a>
+                                <span><img src="images/icon7.png" alt="">{{item.comment}}</span>
+                                <span><img src="images/icon4.png" alt="">{{item.collection}}</span>
+                                <p>{{item.description}}</p>
+                            </div>
+
+                            <div class="movie-list-box" v-if="vedioCourse[index+1]!=null">
+                                <a href="../login.html">
+                                    <div class="movie-list-img">
+                                        <img src="https://img.mukewang.com/58cf6639000183f406000338-240-135.jpg" alt="" class="listmovie-img">
+                                    </div>
+                                    <h4>
+                                        {{vedioCourse[index+1].title}}
+                                    </h4>
+                                </a>
+                                <span><img src="images/icon7.png" alt="">{{vedioCourse[index+1].comment}}</span>
+                                <span><img src="images/icon4.png" alt="">{{vedioCourse[index+1].collection}}</span>
+                                <p>{{vedioCourse[index+1].description}}</p>
+                            </div>
+
+                            <div class="movie-list-box" v-if="vedioCourse[index+2]!=null">
+                                <a href="../login.html">
+                                    <div class="movie-list-img">
+                                        <img src="https://img.mukewang.com/58cf6639000183f406000338-240-135.jpg" alt="" class="listmovie-img">
+                                    </div>
+                                    <h4>
+                                        {{vedioCourse[index+2].title}}
+                                    </h4>
+                                </a>
+                                <span><img src="images/icon7.png" alt="">{{vedioCourse[index+2].comment}}</span>
+                                <span><img src="images/icon4.png" alt="">{{vedioCourse[index+2].collection}}</span>
+                                <p>{{vedioCourse[index+2].description}}</p>
+                            </div>
+
+                            <div class="movie-list-box" v-if="vedioCourse[index+3]!=null">
+                                <a href="../login.html">
+                                    <div class="movie-list-img">
+                                        <img src="https://img.mukewang.com/58cf6639000183f406000338-240-135.jpg" alt="" class="listmovie-img">
+                                    </div>
+                                    <h4>
+                                        {{vedioCourse[index+3].title}}
+                                    </h4>
+                                </a>
+                                <span><img src="images/icon7.png" alt="">{{vedioCourse[index+3].comment}}</span>
+                                <span><img src="images/icon4.png" alt="">{{vedioCourse[index+3].collection}}</span>
+                                <p>{{vedioCourse[index+3].description}}</p>
+                            </div>
+                            
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+    <!--视频课程详情内容结束-->
+</div>
+<script src="js/VideoCourse.js"></script>
+</body>
+</html>

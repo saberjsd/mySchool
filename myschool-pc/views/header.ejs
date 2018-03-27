@@ -1,0 +1,124 @@
+<link rel="stylesheet" href="css/header.css">
+
+<div id="headerapp">
+<nav class="navbar navbar-default" role="navigation">
+ <div class="container-fluid">
+  <div class="navbar-header">
+   <a class="navbar-brand" href="/">MySchool<small>.com</small></a>
+  </div>
+  <ul class="nav navbar-nav nav-list">
+   <li ><a href="/course">所有课程</a></li>
+   <li><a href="/videoCourse">视频课程</a></li>
+   <li><a href="#">文档课程</a></li>
+  </ul>
+  <form class="navbar-form navbar-left" role="search">
+   <!--<div class="form-group">-->
+   <input type="text" class="form-control" placeholder="Search">
+   <!--</div>-->
+   <button type="submit" class="btn btn-default"><img src="./images/serch1.png" alt=""></button>
+  </form>
+  <ul class="nav navbar-nav navbar-right">
+   <li>
+    <span class="glyphicon glyphicon-user"></span>
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">注册</button>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+     <div class="modal-dialog">
+       <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+         <button id="login" @click="login()">登录</button>
+         <button id="register" @click="register()">注册</button>
+        <!--<h3 class="modal-title" id="myModalLabel">登录</h3>-->
+       </div>
+       <div class="modal-body">
+           <form action="" class="login" v-if="isLoginIn" >
+            <p class="remind"></p>
+            <input type="text" placeholder="请输入用户名..." name="username" v-model="userInfo.username" :key="1" class="username"
+            @mouseout="checkUsername()">
+            <input type="password" placeholder="请输入密码..." name="passwd" v-model="userInfo.passwd" :key="2" class="passwd" >
+            <input type="button" value="登录" class="btn1" @click="doSubmitLogin()">
+           </form>
+        <form action="" class="register"  v-if="!isLoginIn" key="register">
+          <input type="text" placeholder="请输入注册用户名..." name="username" v-model="userInfo.username" :key="3">
+          <input type="password" placeholder="请输入注册密码..." name="passwd" v-model="userInfo.passwd" :key="4">
+          <input type="button" value="注册" class="btn1" @click="doSubmitRes()">
+        </form>
+       </div>
+
+        <div class="modal-footer">
+         <p>其他登录方式</p>
+         <img src="/images/qq.png" alt="">
+         <img src="/images/weixin.png" alt="">
+         <img src="/images/weibo.png" alt="">
+        </div>
+      </div>
+     </div>
+    </div>
+   </li>
+   <li>
+    <span class="glyphicon glyphicon-log-in"></span>
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">登录</button>
+   </li>
+  </ul>
+ </div>
+</nav>
+</div>
+<script>
+ var app = new Vue({
+     el:"#headerapp",
+     data:{
+         isLoginIn:true,
+         userInfo:{
+             username:"",
+             passwd:""
+         },
+         userInfolist:[]
+     },
+     methods:{
+         checkUsername:function () {
+             if($("").val() == ''){
+                 $(".remind").val('请输入用户名');
+             }
+         },
+         doSubmitLogin:function () {
+             if($(".login .username").val() == ""){
+                 $(".remind").val('请输入用户名');
+
+             }
+             var username =this.userInfo.username.toString();
+             var passwd = this.userInfo.passwd.toString();
+             console.log(passwd);
+             var url = "/list?username="+username+"&passwd="+passwd;
+             this.$http.get(url).then(function (res) {
+                 console.log(res.data);
+//                 this.userInfolist = res.data;
+                 if( res.data == 'username-err'){
+                    alert('用户名错误')
+                 }else if(res.data == 'passwd-err'){
+                    alert('密码错误');
+                 }else if(res.data == 'success'){
+                     window.location.href="/loginedIndex";
+                 }
+             })
+//             var url1 = "/getUserInfo?uid="+this.userInfolist.uid
+//             this.$http.get(url1).then(function (res) {
+//
+//             })
+
+
+         },
+         login:function () {
+             $(".modal-header button:eq(2)").css("color","");
+             $(".modal-header button:eq(1)").css("color","rgb(240,20,20)");
+             this.isLoginIn = true;
+         },
+         register:function () {
+             this.isLoginIn = false;
+             $(".modal-header button:eq(1)").css("color","");
+             $(".modal-header button:eq(2)").css("color","rgb(240,20,20)");
+         }
+
+     }
+ })
+</script>
+
