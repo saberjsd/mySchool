@@ -13,8 +13,15 @@
         .frozen{color: #68dff0}
         .is-teacher{color: #26ae5f;}
         .E{color: red}
-        .searchF{display: inline-block;width: 300px}
-        .search{display: inline-block !important; width: 160px;margin-left: 10px;margin-right: 10px;}
+        .searchF{display: inline-block;width: 250px;padding-left: 20px;}
+        .searchL{width: 310px}
+        .search{display: inline-block !important; width: 160px;margin-left: 10px;padding-left: 10px;}
+
+        .pagination{width: 530px;height: 35px;text-align: center;}
+        .pagination div{width: 150px;height: 35px;display: flex !important;align-items: center;}
+        .pagination div input{width: 50px !important;}
+        .pagination div>span,.pagination div>input,.pagination div>button{margin-left: 10px}
+        .pagination div>span{white-space: nowrap;}
     </style>
       <!--main content start-->
     <!--<script src="https://cdn.bootcss.com/angular.js/1.6.3/angular.min.js"></script>-->
@@ -26,39 +33,41 @@
 <div class="row mt">
   <div class="col-md-12">
       <div class="content-panel">
+
+          <form class="form-inline" action="/userList" method="get">
+
           <table class="table table-striped table-advance table-hover">
 
-                  <form class="form-inline" action="/userList" method="get">
-                      <div class="form-group searchF">
-                          <input type="text" class="form-control search" name="nameKey" placeholder="请输入..." value="">
-                          <button type="submit" class="btn btn-primary">搜索用户名</button>
-                      </div>
-                  </form>
 
-                  <form class="form-inline" action="/userList" method="get">
                       <div class="form-group searchF">
+                          <label>用户名</label>
+                          <input type="text" class="form-control search" name="nameKey" placeholder="请输入用户名关键词..." value="<%=nameKey?nameKey:''%>">
+                      </div>
+
+                      <div class="form-group searchF">
+                          <label>角色</label>
                           <select class="form-control search" name="roleKey">
                               <option value="">=请选择角色=</option>
-                              <option value="1">教师</option>
-                              <option value="0">学生</option>
+                              <option value="1" <%=roleKey==='1'?'selected':''%> >教师</option>
+                              <option value="0" <%=roleKey==='0'?'selected':''%> >学生</option>
                           </select>
-                          <button type="submit" class="btn btn-primary">筛选角色</button>
-                      </div>
-                  </form>
-
-                  <form class="form-inline" action="/userList" method="get">
-                      <div class="form-group searchF">
-                          <div class="form-group searchF">
-                              <select class="form-control search" name="statusKey">
-                                  <option value="">=请选择状态=</option>
-                                  <option value="0">冻结</option>
-                                  <option value="1">正常</option>
-                              </select>
-                              <button type="submit" class="btn btn-primary">筛选状态</button>
-                          </div>
                       </div>
 
-                  </form>
+                      <div class="form-group searchF ">
+                          <label>状态</label>
+                          <select class="form-control search" name="statusKey">
+                              <option value="">=请选择状态=</option>
+                              <option value="0" <%=statusKey==='0'?'selected':''%> >冻结</option>
+                              <option value="1" <%=statusKey==='1'?'selected':''%> >正常</option>
+                          </select>
+
+                      </div>
+
+                      <div class="form-group searchF ">
+                          <button type="submit" class="btn btn-primary">一键筛选</button>
+                      </div>
+
+
 
               <hr>
               <thead>
@@ -100,13 +109,13 @@
                           <i class="fa fa-refresh"></i>
                       </button>
                       <!--修改-->
-                      <button class="btn btn-primary btn-xs "
+                      <button class="btn btn-primary btn-xs " type="button"
                               ng-click="setUserInfo(<%=itemList.uid%>,<%=itemList.role%>,<%=itemList.status%>)">
                           <i class="fa fa-pencil"></i>
                       </button>
 
                       <!--删除-->
-                      <button class="btn btn-danger btn-xs delete" uid="<%=itemList.uid%>">
+                      <button class="btn btn-danger btn-xs delete" type="button" uid="<%=itemList.uid%>">
                           <i class="fa fa-trash-o "></i>
                       </button>
                   </td>
@@ -115,6 +124,29 @@
               </tbody>
 
           </table>
+
+              <ul class="pagination center-block">
+                  <!--上一页-->
+                  <li><a href="userList?page=<%= pageNow-1<1?1:pageNow-1%><%=nameKey?'&nameKey='+nameKey:''%><%=roleKey?'&roleKey='+roleKey:''%><%=statusKey?'&statusKey='+statusKey:''%>">上一页</a></li>
+                  <%- start>1?'<li><a>...</a></li>':''%>
+                  <!--页码-->
+                  <%for(var i=start; i<=end; i++){%>
+                  <li class="<%= pageNow==i?'active':''%>"><a href="userList?page=<%=i%><%=nameKey?'&nameKey='+nameKey:''%><%=roleKey?'&roleKey='+roleKey:''%><%=statusKey?'&statusKey='+statusKey:''%>"> <%=i%> </a></li>
+                  <%}%>
+
+                  <%- end<totalPage?'<li><a>...</a></li>':''%>
+                  <!--下一页-->
+                  <li><a href="userList?page=<%= pageNow-1+2>totalPage?totalPage:pageNow-1+2%><%=nameKey?'&nameKey='+nameKey:''%><%=roleKey?'&roleKey='+roleKey:''%><%=statusKey?'&statusKey='+statusKey:''%>">下一页</a></li>
+
+                  <div class="form-group">
+                      <span>共<%=totalPage%>页</span>
+                      <input type="text" name="page" class="form-control">
+                      <button type="submit" class="btn btn-default">跳转</button>
+                  </div>
+              </ul>
+              <!-- 跳转 -->
+          </form>
+
 
       </div><!-- /content-panel -->
   </div><!-- /col-md-12 -->
@@ -186,10 +218,11 @@
 
 
       <!--main content end-->
-      <!--footer start-->
-      <%include footer.ejs%>
-      <!--footer end-->
+
   </section>
+    <!--footer start-->
+    <%include footer.ejs%>
+    <!--footer end-->
     <script>
         var app = angular.module('main-content',[]);
         app.controller('controller1', function($scope) {

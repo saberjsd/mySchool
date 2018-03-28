@@ -4,61 +4,59 @@ var dao = new UserDao();
 dao.init();
 
 //用户列表
+
+// 总的分页
+var totalPage =0;
+// 当前页面
+var page = 1;
+// 每页显示数目
+var pageNum = 2;
+var limit = 0;
+// 每次显示分页数
+var totalShow = 5;
+
 exports.userList = function (req, res) {
-    var result = {
-        pageMenu:'userInfo',
-        page:'userList'
-    };
-    var nameKey = req.query.nameKey;
-    var roleKey = req.query.roleKey;
-    var statusKey = req.query.statusKey;
-    if(nameKey){
-        // console.log(nameKey)
-        dao.searchName(nameKey,function (err1,data1) {
-            if(!err1){
-                result.userList = data1;
-                result.nameKey = nameKey;
-                // console.log(result)
-                res.render('userList',result)
+    console.log(req.query)
+    // if(req.query.page)
+    page = req.query.page || 1;
+
+    // limit的值
+    limit = (page-1)*pageNum;
+    // console.log('limit:'+limit)
+    dao.userInfo(limit,pageNum,req.query,function(err,data){
+        if(!err){
+            data.pageMenu = 'userInfo';
+            data.page = 'userList';
+            // 分页总页数
+            totalPage = Math.ceil(data.totalNum/pageNum)
+
+            // 起始页码
+            var start = page-(totalShow-1)/2;
+            if(start < 1){
+                start = 1;
             }
-        })
-    }
-    else if(roleKey){
-        // roleKey=='教师'?roleKey=1:roleKey=0
-        console.log(roleKey)
-        dao.searchRole(roleKey,function (err1,data1) {
-            if(!err1){
-                result.userList = data1;
-                result.nameKey = "?";
-                result.roleKey = roleKey;
-                // console.log(result)
-                res.render('userList',result)
+            // 结束页码
+            var end = start+totalShow-1;
+            if(end > totalPage){
+                end	= totalPage;
+                start	= end - totalShow+1;
+                if(start < 1){
+                    start = 1;
+                }
             }
-        })
-    }
-    else if(statusKey){
-        // statusKey=='正常'?statusKey=1:statusKey=0;
-        console.log(statusKey)
-        dao.searchStatus(statusKey,function (err1,data1) {
-            if(!err1){
-                result.userList = data1;
-                result.nameKey = "?";
-                result.statusKey = statusKey;
-                // console.log(result)
-                res.render('userList',result)
-            }
-        })
-    }
-    else{
-        dao.userList(function (err1,data1) {
-            if(!err1){
-                result.userList = data1;
-                result.nameKey = "?";
-                // console.log(result)
-                res.render('userList',result)
-            }
-        })
-    }
+            data.totalPage = totalPage;
+            data.pageNow = page;
+            console.log('Page:'+page)
+            console.log('totalPage:'+totalPage)
+            data.start = start;
+            data.end = end;
+            // console.log(data)
+            res.render('userList',data)
+
+
+        }
+    })
+
 
 
 };

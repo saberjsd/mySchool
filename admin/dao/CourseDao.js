@@ -17,18 +17,27 @@ function CourseDao(){
     }
 
     //课程列表信息
-    this.getCourse = function(call){
+    this.getCourse = function(start,end,call){
         var result = {};
-        var sql1 = "SELECT * FROM cate WHERE status = 1"
+        //查询总记录数
+        var sql1 = "SELECT COUNT(id) AS totalNum FROM course WHERE status = 1"
+        connection.query(sql1,function (err, data) {
+            result.totalNum = data[0].totalNum;
+        });
+
+        sql1 = "SELECT * FROM cate WHERE status = 1"
         connection.query(sql1,function (err, data) {
             result.cateMenu = data;
         });
-        sql1 = 'SELECT * FROM course WHERE status = 1 LIMIT 10';
+        sql1 = 'SELECT * FROM course WHERE status = 1 LIMIT '+start+','+end;
         connection.query(sql1,function (err, data) {
             result.courseList = data;
             call(err, result);
         });
     }
+
+
+
     this.getCourseItem = function (cid,call) {
         // var sql = "SELECT i.id,i.title,i.description,c.catename FROM course AS i " +
         //     "LEFT JOIN cate AS c " +

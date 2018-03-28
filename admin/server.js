@@ -19,7 +19,7 @@ app.use(session({
     name: 'admin_session',   //这里的name值得是cookie的name，默认cookie的name是：connect.sid
     resave: false,   //强制保存 session 即使它并没有变化,。默认为 true。建议设置成 false
     saveUninitialized: true,   //强制将未初始化的 session 存储。 默认值是true  建议设置成true
-    cookie: {maxAge: 1000*60*60*24 },    //设置maxAge单位是ms，设置时间后session和相应的cookie失效过期
+    cookie: {maxAge: 1000*60*60*24 }   //设置maxAge单位是ms，设置时间后session和相应的cookie失效过期
 }));
 
 app.get('/login.html',function (req,res) {

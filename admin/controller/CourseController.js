@@ -4,16 +4,69 @@ var dao = new CourseDao();
 dao.init();
 
 //课程管理
+
+var totalPage =0;
+// 当前页面
+var page = 1;
+// 每页显示数目
+var pageNum = 2;
+var limit = (page-1)*pageNum;
+// 每次显示分页数
+var totalShow = 5;
+
+
+
 exports.courseList = function (req, res) {
-    // var result = {
-    //     pageMenu:'course',
-    //     page:'courseList'
-    // };
-    dao.getCourse(function (err,data) {
+    page = req.query.page || page;
+    // 上一页,下一页
+    if(req.query.a){
+        req.query.a =='next'?page++:page--;
+        if(page<1) page =1;
+        if(page>totalPage) page=totalPage;
+    }
+
+
+
+    // limit的值
+    limit = (page-1)*pageNum;
+    dao.getCourse(limit,pageNum,function (err,data) {
         if(!err){
+            //侧边栏数据
             data.pageMenu = 'course';
             data.page = 'courseList';
-            console.log(data)
+            // 分页总页数
+            totalPage = Math.ceil(data.totalNum/pageNum)
+
+            // 起始页码
+            var start = page-(totalShow-1)/2;
+            if(start < 1){
+                start = 1;
+            }
+            // 结束页码
+            var end = start+totalShow-1;
+            if(end > totalPage){
+                end	= totalPage;
+                start	= end - totalShow+1;
+                if(start < 1){
+                    start = 1;
+                }
+            }
+
+            // console.log(start+','+end)
+
+            // console.log(totalPage)
+            data.totalPage = totalPage;
+            data.pageNow = page;
+
+            data.start = start;
+            data.end = end;
+            // 将栏目信息写入对象
+            var obj = {}
+            data.cateMenu.forEach(function(item){
+                obj[item.cid] = item.catename
+            })
+            data.cateName = obj;
+            // console.log(data)
             res.render('courseList',data)
         }
     })
