@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加课程</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.js"></script>
+</head>
+<body id="app">
+
+
+<div class="wrap">
+
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>添加课程</h3>
+        </div>
+        <div class="panel-body">
+            <form id="addVideoCourse" class="form-horizontal">
+                <div class="form-group">
+                    <label  class="col-sm-2 control-label">一级栏目</label>
+                    <div class="col-sm-8">
+                        <select class="form-control"  name="firstID" ng-model="firstID">
+                            <option  ng-repeat="item1 in course.cateMenu"
+                                     value="{{item1.cid}}">{{item1.cid}}--{{item1.catename}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-sm-2 control-label">二级栏目</label>
+                    <div class="col-sm-8">
+                        <select class="form-control"  name="secondID">
+                            <option ng-if="item1.pid == firstID" ng-repeat="item1 in course.cateList"
+                                    value="{{item1.cid}}" >{{item1.cid}}--{{item1.catename}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-sm-2 control-label">名称</label>
+                    <div class="col-sm-8">
+                        <input name="title" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-sm-2 control-label">简介</label>
+                    <div class="col-sm-8">
+                        <textarea name="description" class="form-control" rows="5" ></textarea>
+                    </div>
+                </div>
+                <hr>
+                <div class="center-block">
+                    <div class="col-sm-2"></div>
+                    <button type="button" class="btn btn-danger btn-lg col-xs-12 col-sm-3" id="cancelBtn2">取消</button>
+                    <div class="col-sm-2"></div>
+                    <button type="submit" class="btn btn-success btn-lg col-xs-12 col-sm-3">保存</button>
+                    <div class="col-sm-2"></div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+</div>
+<script>
+    var v = new Vue({
+        el:'#app',
+        data:{
+
+        },
+        methods:{
+
+        }
+    });
+</script>
+
+</body>
+</html>
