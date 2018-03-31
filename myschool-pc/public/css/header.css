@@ -28,25 +28,27 @@
     /*color: black;*/
 /*}*/
 .navbar-left{
+    /*width: 300px!important;*/
     height: 48px;
-    padding: 17px 0;
+    padding: 10px 0;
     color: #71777d;
     background-color: transparent!important;
     font-size: 12px;
-    margin-left: 20px;
+    margin-left:10%;
     box-sizing: border-box;
 }
 .form-control{
-
-    border:none;
-    /*border-top-color:white;*/
-    /*outline:medium;*/
+    /*border:none;*/
+    outline: none;
     background-color: white;
-    /*border-bottom-color: #ae9eae;*/
+
 }
 .btn-default{
     border: none;
-    margin-left: -40px;
+    /*margin-left: -40px;*/
+}
+.btn-default:hover{
+    background-color: lightblue;
 }
 .navbar-right li{
     font-size: 16px;
@@ -58,7 +60,7 @@
     /*margin-top: 13px;*/
     color:  #71777d;
     margin-left: 3px;
-    margin-right: 20px;
+    margin-right: 15px;
 }
 .navbar-right li button:hover{
     color: rgb(240,20,20);
@@ -94,19 +96,40 @@
     /*text-align: center;*/
 }
 .modal-body{
-    width: 400px;
+    width: 350px;
 }
 .modal-body input{
-    text-align: center;
+    /*text-align: center;*/
+    text-indent: 1em;
     font-size: 14px;
     display: block;
     width: 90%;
-    height: 50px;
-    margin-left: 4%;
-    margin-top: 20px;
-    border-radius: 10px;
-    margin-bottom: 10px;
+    height: 40px;
+    margin-left: 12%;
+    margin-top: 5px;
+    border-radius: 5px;
+    margin-bottom: 5px;
     border: 1px solid grey;
+    outline: none;
+}
+.login span{
+    font-size: 14px;
+    margin-left:12%;
+    /*margin-top: -10px;*/
+    color: red;
+}
+.register span{
+    font-size: 14px;
+    margin-left:12%;
+    /*margin-top: -10px;*/
+    color: red;
+}
+#login{
+    color:rgb(240,20,20) ;
+    background-color: white;
+}
+#login:active{
+    color:rgb(240,20,20) ;
 }
 .btn1{
     background-color:  rgb(240,20,20);
@@ -116,11 +139,14 @@
 }
 .modal-footer p{
     float:left;
-    font-size: 16px;
+    font-size: 15px;
     margin-left: 10px;
 }
 .modal-footer img{
-    margin-left: 10px;
+    /*margin-left: 5px;*/
+    margin-right: 10px;
+    width: 25px;
+    height: 25px;
 }
 .container-fluid{
     position: relative;
@@ -134,7 +160,7 @@
     background-color: white;
     border-radius: 10px;
     position: absolute;
-    top:60px;
+    top:54px;
     right: 10px;
 
 }
@@ -163,7 +189,8 @@
     left:37%;
 }
 .header-img .userInfo-box-header .collection span{
-    margin-right: 5px;
+    margin-right:15px;
+    font-size: 12px;
     color: rgb(147,153,159);
 }
 .header-img .userInfo-box-content,.userInfo-box-content1{
@@ -193,11 +220,15 @@
 }
 .box1 a,.box2 a,.box3 a,.box4 a{
     color: rgb(147,153,159) ;
+    font-size: 13px;
     text-decoration: none;
 }
+.box1 img,.box2 img,.box3 img ,.box4 img{
+    margin-right: 3px;
+}
 .box1 span,.box2 span,.box3 span ,.box4 span{
-    font-size: 14px;
-    margin-right: 50px;
+    font-size: 13px;
+    margin-right:10px;
 }
 .box1:hover,.box2:hover,.box3:hover,.box4:hover{
     background-color: rgb(217,221,215);
@@ -208,6 +239,7 @@
     left: 7%;
 }
 .header-img .userInfo-box-footer a{
+    font-size: 14px;
     text-decoration: none;
     color:rgb(147,153,159) ;
 }

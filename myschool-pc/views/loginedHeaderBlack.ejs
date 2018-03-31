@@ -6,9 +6,9 @@
                 <a class="navbar-brand" href="/loginedIndex">MySchool<small>.com</small></a>
             </div>
             <ul class="nav navbar-nav nav-list">
-                <li ><a href="/loginedcourse">所有课程</a></li>
-                <li><a href="/loginedVideoCourse">视频课程</a></li>
-                <li><a href="#">文档课程</a></li>
+                <li class="allclass"><a href="/loginedcourse">所有课程</a></li>
+                <li class="videoclass"><a href="/loginedVideoCourse">视频课程</a></li>
+                <li><a href="">文档课程</a></li>
             </ul>
             <form class="navbar-form navbar-left" role="search">
                 <!--<div class="form-group">-->
@@ -21,13 +21,15 @@
                     <img src="/images/提醒.png" alt="" width="20px" height="20px">
                 </li>
                 <li>
-                    <div class="header-img" @mouseover="Infobox()">
+                    <div class="header-img" @mouseover="Infobox()" v-for="item in userinfo">
+                    <a href="/personalInfo">
                     <img src="/images/bg1.jpg" alt="" width="40px" height="40px;" style="border-radius: 50%">
+                    </a>
                     <div class="userInfo-box"  @mouseout="hideInfobox()">
                         <div class="userInfo-box-header">
-                            <a href="">
+                            <a href="/personalInfo">
                                 <img src="/images/Bg.jpg" alt="" width="70px" height="70px">
-                                <h5 class="userInfo-title">用户的名字</h5>
+                                <h5 class="userInfo-title">{{item.nickname}}</h5>
                             </a>
                             <div class="collection">
                                 <span>收藏0</span>
@@ -80,7 +82,17 @@
 <script>
     var app =new Vue({
         el:"#headerapp",
-        data:{},
+        data:{
+            userinfo:[]
+        },
+        mounted:function(){
+            this.$nextTick(function () {
+                this.$http.get("/getuserInfo").then(function(res) {
+                    console.log(res.data);
+                    this.userinfo = res.data;
+                })
+            })
+        },
         methods:{
             Infobox:function () {
                 document.querySelector(".userInfo-box").style.display = 'block';

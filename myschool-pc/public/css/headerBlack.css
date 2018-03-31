@@ -7,6 +7,7 @@
     margin-bottom: -10px;
     background-color:#07111b;
     align-content: center;
+    outline: none;
 }
 .navbar-header a{
     margin-left: 10px;
@@ -14,7 +15,7 @@
 .navbar-brand{
     font-size: 27px;
     margin-top: 10px;
-    color: white;
+    color: white!important;
     /*margin-left: 20px;*/
 }
 .nav-list{
@@ -24,17 +25,18 @@
 }
 .nav-list li{
     margin-left: 10px;
+    /*color: ;*/
 }
-.nav-list li a:active{
-    color: white;
+.nav-list li a:hover{
+    color: white!important;
 }
 .navbar-left{
     height: 48px;
-    padding: 17px 0;
+    padding: 10px 0;
     color: white;
     background-color: transparent!important;
     font-size: 12px;
-    margin-left: 20px;
+    margin-left: 10%;
     box-sizing: border-box;
 }
 .form-control{
@@ -46,17 +48,112 @@
 }
 .btn-default{
     border: none;
-    margin-left: -40px;
+    background-color: #07111b;
+}
+.btn-default:hover{
+    background-color: white;
 }
 .navbar-right li{
     font-size: 16px;
     margin-top: 10px;
+}
+.navbar-right li .btn-lg{
+    border:none ;
+    background-color: #07111b;
+    /*margin-top: 13px;*/
+    color:  #71777d;
+    margin-left: 3px;
+    margin-right: 15px;
+}
+.navbar-right li .btn-lg:hover{
+    background-color: #07111b;
+    color: rgb(240,20,20);
+}
+.navbar-right li .btn-lg:active{
+    border: none;
+    background-color: #07111b;
 }
 .navbar-right img{
     margin-right: 30px;
 }
 .tixing img{
     margin-top: 15px;
+}
+/*.btn-lg:hover{*/
+    /*background-color: white;*/
+/*}*/
+/*.btn-lg:active{*/
+    /*background-color: white;*/
+    /*border: none;*/
+/*}*/
+.modal-header{
+    width: 400px;
+}
+.modal-header button{
+    outline: none;
+    border: none;
+    background-color: white;
+    margin-left: 10px;
+}
+.modal-header button:active{
+    color: rgb(240,20,20) ;
+}
+.modal-content{
+    width: 400px;
+    margin-left: 20%;
+    /*text-align: center;*/
+}
+.modal-body{
+    width: 350px;
+}
+.modal-body input{
+    /*text-align: center;*/
+    text-indent: 1em;
+    font-size: 14px;
+    display: block;
+    width: 90%;
+    height: 40px;
+    margin-left: 12%;
+    margin-top: 5px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    border: 1px solid grey;
+    outline: none;
+}
+.login span{
+    font-size: 14px;
+    margin-left:12%;
+    /*margin-top: -10px;*/
+    color: red;
+}
+.register span{
+    font-size: 14px;
+    margin-left:12%;
+    /*margin-top: -10px;*/
+    color: red;
+}
+#login{
+    color:rgb(240,20,20) ;
+}
+#login:active{
+    color:rgb(240,20,20) ;
+}
+.btn1{
+    background-color:rgb(240,20,20);
+    color: white;
+    font-size: 16px;
+    outline: none;
+}
+.modal-footer p{
+    float:left;
+    font-size: 15px;
+    margin-left: 10px;
+}
+.modal-footer img{
+    /*margin-left: 5px;*/
+    margin-right: 10px;
+    width: 25px;
+    height: 25px;
 }
 .userInfo-box{
     display: none;
@@ -95,6 +192,7 @@
     left:37%;
 }
 .header-img .userInfo-box-header .collection span{
+    font-size: 12px;
     margin-right: 5px;
     color: rgb(147,153,159);
 }
@@ -127,6 +225,10 @@
     color: rgb(147,153,159) ;
     text-decoration: none;
 }
+.box1 img,.box2 img,.box3 img ,.box4 img{
+    margin-right: 3px;
+    margin-left: 20px;
+}
 .box1 span,.box2 span,.box3 span ,.box4 span{
     font-size: 14px;
     margin-right: 50px;
@@ -141,6 +243,7 @@
 }
 .header-img .userInfo-box-footer a{
     text-decoration: none;
+    font-size: 14px;
     color:rgb(147,153,159) ;
 }
 .header-img .userInfo-box-footer a:hover{

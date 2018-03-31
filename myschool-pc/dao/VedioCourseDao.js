@@ -36,7 +36,18 @@ function VedioCourseDao() {
             // console.log(res.jsonp(result));
         });
     }
-
+    this.vedioCourseList=function (user,id,call) {
+        var  userGetSql = 'SELECT * FROM '+user+" WHERE status =1 AND firstID="+id+" Order by creatTime desc";
+        console.log(userGetSql);
+        connection.query(userGetSql,function (err, result) {
+            if(err){
+                console.log('视频课程 - ',err.message);
+                return;
+            }
+            call(err,result);
+            // console.log(res.jsonp(result));
+        });
+    }
     this.finish=function () {
 
     }

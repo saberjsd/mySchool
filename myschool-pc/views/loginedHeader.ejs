@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="css/header.css">
-<!--<div id="headerapp">-->
+<div id="headerapp">
     <nav class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -21,13 +21,15 @@
                     <img src="/images/提醒.png" alt="" width="20px" height="20px">
                 </li>
                 <li>
-                    <div class="header-img" @mouseover="Infobox()" >
+                    <div class="header-img" @mouseover="Infobox()" v-for="item in userinfo">
+                        <a href="/personalInfo">
                         <img src="/images/bg1.jpg" alt="" width="40px" height="40px;" style="border-radius: 50%" @click="GoInfo()">
+                        </a>
                         <div class="userInfo-box"  @mouseout="hideInfobox()">
                             <div class="userInfo-box-header">
-                                <a href="">
+                                <a href="/personalInfo">
                                     <img src="/images/Bg.jpg" alt="" width="70px" height="70px">
-                                    <h5 class="userInfo-title">用户名称</h5>
+                                    <h5 class="userInfo-title">{{item.nickname}}</h5>
                                 </a>
                                 <div class="collection">
                                     <span>收藏0</span>
@@ -64,7 +66,6 @@
                                         <span>个人设置</span>
                                     </a>
                                 </div>
-
                             </div>
                             <div class="userInfo-box-footer">
                                 <a href="/">安全退出</a>
@@ -73,29 +74,33 @@
                     </div>
                 </li>
             </ul>
-
-
-
-
         </div>
     </nav>
-<!--</div>-->
+</div>
+<script>
+    var app =new Vue({
+        el:"#headerapp",
+        data:{
+            userinfo:[]
+        },
+        mounted:function(){
+            this.$nextTick(function () {
+                this.$http.get("/getuserInfo").then(function(res) {
+                        console.log(res.data);
+                        this.userinfo = res.data;
+                })
+            })
+        },
+        methods:{
+            Infobox:function () {
+               document.querySelector(".userInfo-box").style.display = 'block';
+            },
+            hideInfobox:function () {
+                document.querySelector(".userInfo-box").style.display = 'none';
+            }
+        },
+        GoInfo:function () {
 
-<!--<script>-->
-    <!--var app =new Vue({-->
-        <!--el:"#headerapp",-->
-        <!--data:{},-->
-        <!--methods:{-->
-            <!--Infobox:function () {-->
-               <!--document.querySelector(".userInfo-box").style.display = 'block';-->
-
-            <!--},-->
-            <!--hideInfobox:function () {-->
-                <!--document.querySelector(".userInfo-box").style.display = 'none';-->
-            <!--}-->
-        <!--},-->
-        <!--GoInfo:function () {-->
-
-        <!--}-->
-    <!--})-->
-<!--</script>-->
+        }
+    })
+</script>

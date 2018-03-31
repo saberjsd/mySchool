@@ -25,11 +25,11 @@ var app =  new Vue({
         })
     },
     methods:{
-        Infobox:function () {
-        document.querySelector(".userInfo-box").style.display = 'block';
-        },
-        hideInfobox:function () {
-        document.querySelector(".userInfo-box").style.display = 'none';
-       }
+       //  Infobox:function () {
+       //  document.querySelector(".userInfo-box").style.display = 'block';
+       //  },
+       //  hideInfobox:function () {
+       //  document.querySelector(".userInfo-box").style.display = 'none';
+       // }
     }
 })

@@ -7,7 +7,7 @@
    <a class="navbar-brand" href="/">MySchool<small>.com</small></a>
   </div>
   <ul class="nav navbar-nav nav-list">
-   <li ><a href="/course">所有课程</a></li>
+   <li><a href="/course">所有课程</a></li>
    <li><a href="/videoCourse">视频课程</a></li>
    <li><a href="#">文档课程</a></li>
   </ul>
@@ -20,8 +20,10 @@
   <ul class="nav navbar-nav navbar-right">
    <li>
     <span class="glyphicon glyphicon-user"></span>
-    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">注册</button>
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" @click="register()" >注册</button>
+
+
+       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
      <div class="modal-dialog">
        <div class="modal-content">
         <div class="modal-header">
@@ -32,15 +34,22 @@
        </div>
        <div class="modal-body">
            <form action="" class="login" v-if="isLoginIn" >
-            <p class="remind"></p>
             <input type="text" placeholder="请输入用户名..." name="username" v-model="userInfo.username" :key="1" class="username"
-            @mouseout="checkUsername()">
-            <input type="password" placeholder="请输入密码..." name="passwd" v-model="userInfo.passwd" :key="2" class="passwd" >
+            @blur="checkUsername()">
+            <span class="remindUsername"></span>
+            <input type="password" placeholder="请输入密码..." name="passwd" v-model="userInfo.passwd" :key="2" class="passwd"
+             @blur="checkPasswd()">
+            <span class="remindPasswd"></span>
             <input type="button" value="登录" class="btn1" @click="doSubmitLogin()">
+
            </form>
         <form action="" class="register"  v-if="!isLoginIn" key="register">
-          <input type="text" placeholder="请输入注册用户名..." name="username" v-model="userInfo.username" :key="3">
-          <input type="password" placeholder="请输入注册密码..." name="passwd" v-model="userInfo.passwd" :key="4">
+          <input type="text" placeholder="请输入注册的手机号..." name="username" v-model="userInfo.username" :key="3" class="username"
+           @blur="checkResUsername()">
+            <span class="remindUsername"></span>
+          <input type="password" placeholder="6-16位密码 不能用空格..." name="passwd" v-model="userInfo.passwd" :key="4" class="passwd"
+           @blur="checkResPasswd()">
+            <span class="remindPasswd"></span>
           <input type="button" value="注册" class="btn1" @click="doSubmitRes()">
         </form>
        </div>
@@ -57,7 +66,7 @@
    </li>
    <li>
     <span class="glyphicon glyphicon-log-in"></span>
-    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">登录</button>
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"  @click="login()" >登录</button>
    </li>
   </ul>
  </div>
@@ -67,7 +76,7 @@
  var app = new Vue({
      el:"#headerapp",
      data:{
-         isLoginIn:true,
+         isLoginIn:false,
          userInfo:{
              username:"",
              passwd:""
@@ -76,15 +85,26 @@
      },
      methods:{
          checkUsername:function () {
-             if($("").val() == ''){
-                 $(".remind").val('请输入用户名');
+             if($(".login .username").val() == ''){
+//                 $(".remind").innerHTML = '请输入用户名';
+//                 alert('请输入用户名')
+                 $(".login .remindUsername").html("请输入正确的用户名！");
+             }else if($(".login .username").val() !== ''){
+                 $(".login .remindUsername").html('');
+             }
+         },
+         checkPasswd:function () {
+             if($(".login .passwd").val() == ''){
+//                 $(".remind").innerHTML = '请输入用户名';
+//                 alert('请输入用户名')
+                 $(".login .remindPasswd").html("请输入正确的密码！");
+
+             }
+             else if($(".login .passwd").val() !== ''){
+                 $(".login .remindPasswd").html('');
              }
          },
          doSubmitLogin:function () {
-             if($(".login .username").val() == ""){
-                 $(".remind").val('请输入用户名');
-
-             }
              var username =this.userInfo.username.toString();
              var passwd = this.userInfo.passwd.toString();
              console.log(passwd);
@@ -93,29 +113,78 @@
                  console.log(res.data);
 //                 this.userInfolist = res.data;
                  if( res.data == 'username-err'){
-                    alert('用户名错误')
+                     $(".login .remindUsername").html("用户名错误！");
                  }else if(res.data == 'passwd-err'){
-                    alert('密码错误');
+                     $(".login .remindPasswd").html("密码错误！");
                  }else if(res.data == 'success'){
                      window.location.href="/loginedIndex";
                  }
              })
-//             var url1 = "/getUserInfo?uid="+this.userInfolist.uid
-//             this.$http.get(url1).then(function (res) {
-//
+         },
+         checkResUsername:function () {
+             var str = $(".register .username").val();
+             var ret = /^[1][3,4,5,7,8][0-9]{9}$/;
+             if(str == ''){
+                 $(".register .remindUsername").html("用户名不能为空！");
+             }else if(ret.test(str)){
+                 $(".register .remindUsername").html('');
+                 var username =this.userInfo.username.toString();
+//                 var passwd = this.userInfo.passwd.toString();
+                 var url = "/list?username="+username;
+                 this.$http.get(url).then(function (res) {
+                     console.log(res.data);
+                     if( res.data == 'username-err'){
+                         //开始存储数据
+                     }else if(res.data == 'passwd-err'){
+                         $(".register .remindUsername").html("该用户已被使用");
+                     }
+                 })
+             }else{
+                 $(".register .remindUsername").html("请输入11位电话号码！");
+             }
+         },
+         checkResPasswd:function () {
+             var str =$(".register .passwd").val();
+             var ret = /^[a-zA-Z0-9~!@#$%^&*()<>,.?\[\]{}]{6,16}$/;
+             if(str == ''){
+//                 $(".remind").innerHTML = '请输入用户名';
+//                 alert('请输入用户名')
+                 $(".register .remindPasswd").html("请输入密码！");
+             }
+             else if(ret.test(str)){
+                 $(".register .remindPasswd").html('');
+             }else{
+                 $(".register .remindPasswd").html('请输入6-16位密码 不能空格');
+             }
+         },
+         doSubmitRes:function () {
+             var username =this.userInfo.username.toString();
+             var passwd = this.userInfo.passwd.toString();
+             console.log(username,passwd);
+             var url = "/list?username="+username;
+             var url1 = "/StoringUserinfo?username="+username+"&passwd="+passwd;
+//             this.$http.get(url).then(function (res) {
+//                 console.log(res.data);
+//                 if( res.data == 'username-err'){
+                     this.$http.get(url1).then(function (res) {
+                         if(res.data =="success"){
+                            window.location.href="/loginedIndex";
+                         }else if(res.data == 'err'){
+                             $(".register .remindPasswd").html('注册失败');
+                         }
+                     })
+//                 }
 //             })
-
-
          },
          login:function () {
-             $(".modal-header button:eq(2)").css("color","");
-             $(".modal-header button:eq(1)").css("color","rgb(240,20,20)");
              this.isLoginIn = true;
+             $(" #register").css("color","rgb(147,153,159)");
+             $("#login").css("color","rgb(240,20,20)");
          },
          register:function () {
              this.isLoginIn = false;
-             $(".modal-header button:eq(1)").css("color","");
-             $(".modal-header button:eq(2)").css("color","rgb(240,20,20)");
+             $("#login").css("color","rgb(147,153,159)");
+             $("#register").css("color","rgb(240,20,20)");
          }
 
      }

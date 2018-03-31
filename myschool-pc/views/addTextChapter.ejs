@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加课程章节</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        /* table 样式 */
+        table {
+            border-top: 1px solid #ccc;
+            border-left: 1px solid #ccc;
+        }
+        table td,
+        table th {
+            border-bottom: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+            padding: 3px 5px;
+        }
+        table th {
+            border-bottom: 2px solid #ccc;
+            text-align: center;
+        }
+
+        /* blockquote 样式 */
+        blockquote {
+            display: block;
+            border-left: 8px solid #d0e5f2;
+            padding: 5px 10px;
+            margin: 10px 0;
+            line-height: 1.4;
+            font-size: 100%;
+            background-color: #f1f1f1;
+        }
+
+        /* code 样式 */
+        code {
+            display: inline-block;
+            *display: inline;
+            *zoom: 1;
+            background-color: #f1f1f1;
+            border-radius: 3px;
+            padding: 3px 5px;
+            margin: 0 3px;
+        }
+        pre code {
+            display: block;
+        }
+
+        /* ul ol 样式 */
+        ul, ol {
+            margin: 10px 0 10px 20px;
+        }
+        #editor{min-height: 480px;}
+        .w-e-text-container{min-height: 400px}
+        #saveBtn{ width: 200px}
+    </style>
+    <link rel="stylesheet" href="lib/wangEditor-fullscreen-plugin.css">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.js"></script>
+    <script src="https://cdn.bootcss.com/vue-resource/1.5.0/vue-resource.js"></script>
+</head>
+<body>
+
+
+<div class="wrap" id="app">
+
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>添加课程章节</h3>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" action="/addTextChapter" method="post" onsubmit="return check()"  >
+
+                <div class="form-group">
+                    <label  class="col-sm-2 control-label">章节标题</label>
+                    <div class="col-sm-8">
+                        <input name="title" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-sm-2 control-label">章节顺序</label>
+                    <div class="col-sm-8">
+                        <input name="order" type="number" class="form-control">
+                    </div>
+                </div>
+
+                <div >
+
+                </div>
+
+                <input type="hidden" name="content" id="editorInput">
+
+
+                <div id="editor" class="col-sm-12">
+                    <!--这里是富文本编辑器的内容-->
+                </div>
+
+                <hr>
+
+                <button type="submit" id="saveBtn" class="btn btn-success btn-lg center-block">保存</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+</div>
+<script type="text/javascript" src="lib/wangEditor.min.js"></script>
+<script src="lib/wangEditor-fullscreen-plugin.js"></script>
+<script>
+    var E = window.wangEditor
+    var editor = new E('#editor')
+    // 或者 var editor = new E( document.getElementById('editor') )
+    editor.create()
+
+    E.fullscreen.init('#editor');
+
+    function check(){
+        $('#editorInput').val(editor.txt.html())
+        return true;
+    }
+    // $('#saveBtn').click(function(){
+    //
+    // })
+</script>
+
+</body>
+</html>

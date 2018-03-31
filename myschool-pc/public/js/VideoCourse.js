@@ -13,7 +13,12 @@ var app = new Vue({
         })
     },
     methods:{
-        changeNav(index){
+        changeNav:function(index){
+            var url = "/getVideoCourseA?id="+(index+1);
+            console.log(url);
+            this.$http.get(url).then(function (res) {
+                this.vedioCourse = res.data;
+            })
             $(".top-nav ul li").attr("class","");
             $(".top-nav ul li a").css("color","white");
             $(".top-nav ul li").css("color","white");

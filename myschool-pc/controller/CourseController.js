@@ -1,6 +1,3 @@
-/**
- * Created by Administrator on 2018/3/26.
- */
 var CourseDao = require("../dao/CourseDao");
 var dao = new CourseDao();
 dao.init();
@@ -14,13 +11,18 @@ exports.course = function (req,res) {
     })
 }
 exports.loginedCourse = function (req,res) {
-    dao.cateMenuAll("cate",function (err,data) {
-        var data = JSON.stringify(data);
-    })
-    dao.cateListAll("cate",function (err,data) {
-        var data = JSON.stringify(data);
-        res.render("loginedCourse",{})
-    })
+    if(req.session.username!=undefined && req.session.passwd!=undefined){
+        dao.cateMenuAll("cate",function (err,data) {
+            var data = JSON.stringify(data);
+        })
+        dao.cateListAll("cate",function (err,data) {
+            var data = JSON.stringify(data);
+            res.render("loginedCourse",{})
+        })
+    }else{
+        res.render("course",{})
+    }
+
 }
 exports.getCateMenu = function (req,res) {
     var id = req.query.id;

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.js"></script>
+    <script src="https://cdn.bootcss.com/vue-resource/1.5.0/vue-resource.js"></script>
+    <link rel="stylesheet" href="css/personalInfo.css">
+    <script class="resources library" src="/js/area.js" type="text/javascript"></script>
+    <script type="text/javascript">_init_area();</script>
+</head>
+<body>
+<%include loginedHeaderBlack.ejs%>
+<div id="app">
+    <div class="main" @load="headLoad()">
+        <div class="row">
+            <div class="user-head-info" >
+                <div class="user-head-img" @mouseover="sendphoto()" @mouseout="delectphoto()">
+                    <img src="/images/bg1.jpg" alt="" >
+                     <p  data-toggle="modal" data-target="#myModal1">更换头像</p>
+
+                    <!-- 模态框（Modal） -->
+                    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="myModalLabel">更换头像</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="/images/bg1.jpg" alt="">
+                                    <form  action="/personalInfo" method="post"  class="pull-right">
+                                        <input type="file" name="photo" id="photo">
+                                        <button class="button" type="submit">提交</button>
+                                    </form>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal -->
+                    </div>
+
+
+
+
+                </div>
+                <div class="user-head-title" v-for="it in personalInfo ">
+                    <h4>{{it.nickname}}</h4>
+                    <span>{{it.sex==0?"男":"女"}}</span>
+                    <span>{{it.province}}</span>
+                    <span>{{it.role==0?"学生":"教师"}}</span>
+                    <span>{{occupation}}</span>
+                    <em>|</em>
+                    <span @click="changhead()" class="more">▽更多信息</span>
+                    <p>{{it.autograph}}</p>
+                </div>
+                <div class="user-head-right">
+                    <ul class="list-inline">
+                        <li>
+                            <span>0h</span>
+                        </li>
+                        <li>
+                            <span>0</span>
+                        </li>
+                        <li>
+                            <span>1</span>
+                        </li>
+                        <li>
+                            <span>1</span>
+                        </li>
+                        <li>
+                            <span>0</span>
+                        </li>
+                    </ul>
+                    <ul class="list-inline">
+                        <li>
+                            <span>学习时长</span>
+                        </li>
+                        <li>
+                            <span>经验</span>
+                        </li>
+                        <li>
+                            <span>积分</span>
+                        </li>
+                        <li>
+                            <span>关注</span>
+                        </li>
+                        <li>
+                            <span>粉丝</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+
+      <div class="user-content">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-2 user-content-list">
+                <ul class="list-unstyled" id="lists">
+                    <li  v-for="(item,index) in menu1" @click="choiceMenu(item,index)" v-if="isTeacher"  >
+                        <img :src="item.sc" alt="">
+                        <span>{{item.title}}</span>
+                    </li>
+                    <li  v-for="(item,index) in menu2" @click="choiceMenu2(item,index)" v-if="!isTeacher" >
+                        <img :src="item.sc" alt="">
+                        <span>{{item.title}}</span>
+                    </li>
+                </ul>
+            </div>
+
+
+
+
+
+            <div class="col-md-8">
+
+                <!--课程开始-->
+                <div class="user-class">
+                    <ul class="list-inline">
+                        <li class="action">最近学习</li>
+                        <li>我的收藏</li>
+                    </ul>
+                    <hr>
+                    <div class="user-class-content">
+                            <div class="Course">
+                                <div class=" movie-list" v-for="(item,index) in collectionCourse" v-if="index%3==0">
+                                    <div class="movie-list-box" >
+                                        <a href="../login.html">
+                                            <div class="movie-list-img">
+                                                <img src="https://img.mukewang.com/58cf6639000183f406000338-240-135.jpg" alt="" >
+                                            </div>
+                                            <h4>
+                                                {{item.title}}
+                                            </h4>
+                                        </a>
+                                        <span><img src="images/icon7.png" alt="">{{item.comment}}</span>
+                                        <span><img src="images/icon4.png" alt="">{{item.collection}}</span>
+                                        <p>{{item.description}}</p>
+                                    </div>
+
+                                    <div class="movie-list-box"  v-if="collectionCourse[index+1]!=null">
+                                        <a href="../login.html">
+                                            <div class="movie-list-img">
+                                                <img src="https://img.mukewang.com/58cf6639000183f406000338-240-135.jpg" alt="" >
+                                            </div>
+                                            <h4>
+                                                {{collectionCourse[index+1].title}}
+                                            </h4>
+                                        </a>
+                                        <span><img src="images/icon7.png" alt="">{{collectionCourse[index+1].comment}}</span>
+                                        <span><img src="images/icon4.png" alt="">{{collectionCourse[index+1].collection}}</span>
+                                        <p>{{collectionCourse[index+1].description}}</p>
+                                    </div>
+
+
+                                    <div class="movie-list-box" v-if="collectionCourse[index+2]!=null">
+                                        <a href="../login.html">
+                                            <div class="movie-list-img">
+                                                <img src="https://img.mukewang.com/58cf6639000183f406000338-240-135.jpg" alt="" >
+                                            </div>
+                                            <h4>
+                                                {{collectionCourse[index+2].title}}
+                                            </h4>
+                                        </a>
+                                        <span><img src="images/icon7.png" alt="">{{collectionCourse[index+2].comment}}</span>
+                                        <span><img src="images/icon4.png" alt="">{{collectionCourse[index+2].collection}}</span>
+                                        <p>{{collectionCourse[index+2].description}}</p>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                </div>
+                </div>
+                <!--课程结束-->
+
+                <!--个人信息开始-->
+                <div class="user-setting" >
+                    <span>个人信息</span>
+                    <div class="right">
+                        <img src="/images/bianji.png" alt="">
+                        <button class="btn btn-primary btn-lg set"  data-toggle="modal" data-target="#myModal">编辑</button>
+                    </div>
+                    <hr>
+                    <!-- 模态框（Modal） -->
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="myModalLabel">编辑个人信息</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/personalInfo" method="post" v-for="item in personalInfo" class="form">
+                                        <div class="group">
+                                            <label for="">昵称:</label>
+                                            <input type="text" class="control nikcname"  placeholder="" name="nikcname" :value="item.nickname">
+                                        </div>
+
+                                        <div class="group">
+                                            <label for="">职位:</label>
+                                            <select class="control position " name="position" id="" :value="item.position">
+                                                <option value=""></option>
+                                                    <option value="">请选择职位</option>
+                                                    <option value="1">学生</option>
+                                                    <option value="2">Web前端工程师</option>
+                                                    <option value="3">PHP开发工程师</option>
+                                                    <option value="4">JAVA开发工程师</option>
+                                                    <option value="5">移动开发工程师</option>
+                                                    <option value="6">Linux系统工程师</option>
+                                                    <option value="7">数据库工程师</option>
+                                                    <option value="8">UI设计师</option>
+                                                    <option value="9">全栈工程师</option>
+
+                                            </select>
+
+                                        </div>
+
+                                        <div class="group">
+                                            <label for="" class="slect">所在地区:</label>
+
+                                            <div class="info">
+                                                <div>
+                                                    <select id="s_province" name="s_province" :value="item.provice"></select>  
+                                                    <select id="s_city" name="s_city" :value="item.city"></select>  
+                                                    <select id="s_county" name="s_county"></select>
+                                                </div>
+                                                <div id="show"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="group">
+                                            <label for="">性别:</label>
+                                            <div class="cheackbox">
+                                                <input type="radio" value="0" name="sex" :checked="isChecked">
+                                                <span>男</span>
+                                                <input type="radio"  value="1"  name="sex" :checked="!isChecked">
+                                                <span>女</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="group">
+                                            <label for="" class="sign">个性签名:</label>
+                                            <textarea  id="" cols="43" rows="3" name="autograph" :value="item.autograph"></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary" >确定</button>
+                                    </form>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal -->
+                    </div>
+                    <!--模态框结束-->
+
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <div class="user-info" v-for="item in personalInfo">
+                                <div class="user-info-left">
+                                    <p>昵称</p>
+                                    <span>{{item.nickname}}</span>
+                                </div>
+                                <div class="user-info-left">
+                                    <p>职位</p>
+                                    <span>{{occupation}}</span>
+                                </div>
+                                <div class="user-info-left">
+                                    <p>城市</p>
+                                    <span>{{item.province}}</span>
+                                </div>
+                                <div class="user-info-left">
+                                    <p>性别</p>
+                                    <span>{{item.sex==0?"男":"女"}}</span>
+                                </div>
+                                <div class="user-info-left booton">
+                                    <p>个性签名</p>
+                                    <span>{{item.autograph}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+                <!--个人信息结束-->
+
+                <!--教师招募开始-->
+                <div class="applyinfo">
+                    <p class="cont">申请成功，请重新登录！感谢您对我们的信任与帮助！</p>
+                </div>
+                <div class="user-apply" v-if="isApply">
+                    <h3>欢迎加入MySchool讲师团，我们因你而精彩</h3>
+                    <form action="/applyInfo" method="post" class="applyform">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <span class="col-md-1"><img src="/images/星号.png" alt="">我的介绍</span>
+                        <div class="col-md-8">
+                            <textarea name="reason" id="" cols="80" rows="8"   class="col-md-12" ></textarea>
+                            <small>简介尽可能体现你的主攻技术方向、从业经历、公开分享的经验等</small>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <span class="col-md-1"><img src="/images/星号.png" alt="">我的姓名</span>
+                        <div class="col-md-4">
+                            <input type="text" name="realName" class="col-md-12">
+                            <small>填写你的真实姓名</small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <span class="col-md-1"><img src="/images/星号.png" alt="">我的电话</span>
+                        <div class="col-md-4">
+                            <input type="number" name="tel" class="col-md-12" :value="personalInfo[0].username">
+                            <small>MySchool网站将获得你的电话</small>
+                        </div>
+                    </div>
+                    <!--<div class="row">-->
+                        <!--<div class="col-md-1"></div>-->
+                        <!--<span class="col-md-1">试讲视频</span>-->
+                        <!--<div class="col-md-4">-->
+                            <!--<input type="text" name="vedio" class="col-md-12">-->
+                            <!--<small>上传视频播放地址</small>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <button class="subtn" type="submit">提交</button>
+                    </form>
+                    <button @click="inspect()" class="abtn">查看申请结果</button>
+
+                </div>
+                <!--讲师招募结束-->
+
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+      </div>
+    </div>
+    </div>
+</div>
+<script type="text/javascript">_init_area();</script>
+<script src="js/personalInfo.js"></script>
+</body>
+</html>

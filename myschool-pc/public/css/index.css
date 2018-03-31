@@ -1,16 +1,16 @@
 .carousel{
     /*height: 370px;*/
     background: linear-gradient(to bottom, #f4f2f4 0%,#ffffff 100%);
-    border-radius: 3%;
+    /*border-radius: 3%;*/
 }
-#myCarousel{
+#carousel-example-generic{
     margin-top: 40px;
     box-shadow: 0px 20px 20px #dcd5dc;
     /*border-radius: 3%;*/
 
 }
-.carousel-inner img{
-    /*border-radius: 3%;*/
+.carousel-inner,.carousel-control.left,.carousel-control.right{
+    border-radius: 15px;
 }
 .content{
     background: linear-gradient(to bottom, #ffffff 0%,#f4f2f4  100%);

@@ -6,11 +6,12 @@
     <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/vue/2.4.4/vue.js"></script>
+    <script src="https://cdn.bootcss.com/vue-resource/1.5.0/vue-resource.js"></script>
 </head>
-<body id="app">
+<body>
 
 
-<div class="wrap">
+<div class="wrap" id="app">
 
 <div class="container">
     <div class="panel panel-default">
@@ -18,13 +19,14 @@
             <h3>添加课程</h3>
         </div>
         <div class="panel-body">
-            <form id="addVideoCourse" class="form-horizontal">
+            <form class="form-horizontal" action="/addCourse" method="post" enctype="multipart/form-data" >
                 <div class="form-group">
                     <label  class="col-sm-2 control-label">一级栏目</label>
                     <div class="col-sm-8">
-                        <select class="form-control"  name="firstID" ng-model="firstID">
-                            <option  ng-repeat="item1 in course.cateMenu"
-                                     value="{{item1.cid}}">{{item1.cid}}--{{item1.catename}}</option>
+                        <select class="form-control" name="firstID" v-model="firstID">
+                            <option value="0">=请选择一级栏目=</option>
+                            <option  v-for="item in cate.cateMenu"
+                                     :value="item.cid">{{item.cid}}--{{item.catename}}</option>
                         </select>
                     </div>
                 </div>
@@ -32,15 +34,35 @@
                     <label  class="col-sm-2 control-label">二级栏目</label>
                     <div class="col-sm-8">
                         <select class="form-control"  name="secondID">
-                            <option ng-if="item1.pid == firstID" ng-repeat="item1 in course.cateList"
-                                    value="{{item1.cid}}" >{{item1.cid}}--{{item1.catename}}</option>
+                            <option value="0">=请选择二级栏目=</option>
+                            <option v-if="item.pid == firstID" v-for="item in cate.cateList"
+                                    :value="item.cid" >{{item.cid}}--{{item.catename}}</option>
                         </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-sm-2 control-label">课程类别</label>
+                    <div class="col-sm-8">
+                        <label class="radio-inline">
+                            <input type="radio" name="isVideo" value="1" checked>
+                            视频
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="isVideo" value="0">
+                            文档
+                        </label>
                     </div>
                 </div>
                 <div class="form-group">
                     <label  class="col-sm-2 control-label">名称</label>
                     <div class="col-sm-8">
                         <input name="title" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-sm-2 control-label">课程封面</label>
+                    <div class="col-sm-8">
+                        <input name="logo" type="file">
                     </div>
                 </div>
                 <div class="form-group">
@@ -52,7 +74,7 @@
                 <hr>
                 <div class="center-block">
                     <div class="col-sm-2"></div>
-                    <button type="button" class="btn btn-danger btn-lg col-xs-12 col-sm-3" id="cancelBtn2">取消</button>
+                    <button type="reset" class="btn btn-danger btn-lg col-xs-12 col-sm-3">重置</button>
                     <div class="col-sm-2"></div>
                     <button type="submit" class="btn btn-success btn-lg col-xs-12 col-sm-3">保存</button>
                     <div class="col-sm-2"></div>
@@ -64,17 +86,8 @@
 </div>
 
 </div>
-<script>
-    var v = new Vue({
-        el:'#app',
-        data:{
 
-        },
-        methods:{
-
-        }
-    });
-</script>
+<script src="js/uploadCourse.js"></script>
 
 </body>
 </html>

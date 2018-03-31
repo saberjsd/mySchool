@@ -5,6 +5,11 @@ var IndexDao = require("../dao/IndexDao");
 var dao = new IndexDao();
 dao.init();
 exports.index=function (req,res) {
+    req.session.destroy(function (err) {
+        if(!err){
+            res.render("index",{});
+        }
+    })
     dao.newest("course",function (err,data) {
         var data = JSON.stringify(data);
         // res.render("index",{flag:false})
@@ -13,16 +18,21 @@ exports.index=function (req,res) {
         var data = JSON.stringify(data);
 
     })
-    res.render("index",{})
+    // res.render("index",{})
 };
 exports.loginedIndex = function (req,res) {
-    dao.newest("course",function (err,data) {
-        var data = JSON.stringify(data);
-        res.render("loginedIndex",{})
-    })
-    dao.recommend('course',function (err,data) {
-        var data = JSON.stringify(data);
-    })
+    console.log(req.session.username);
+    if(req.session.username !=undefined && req.session.passwd !=undefined){
+        dao.newest("course",function (err,data) {
+            var data = JSON.stringify(data);
+            res.render("loginedIndex",{})
+        })
+        dao.recommend('course',function (err,data) {
+            var data = JSON.stringify(data);
+        })
+    }else{
+        res.render("index",{})
+    }
 
 }
 

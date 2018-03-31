@@ -3,6 +3,8 @@ var express = require('express');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var md5 = require('md5');
+var formidable = require('formidable');
+
 var app = express();
 
 // 创建 application/x-www-form-urlencoded 编码解析
@@ -23,12 +25,23 @@ app.use(session({
 }));
 
 var UploadCourseController = require('./controller/UploadCourseController');
+app.get('/addCourse',function(req,res){
+    res.render('uploadCourse',{})
+})
+// 获取栏目列表
 app.get('/getCourseMenu',UploadCourseController.getCourseMenu)
+//上传课程处理
+app.post('/addCourse',urlencodedParser,UploadCourseController.addCourse)
 
-
+//上传课程章节
+var UploadChapterController = require('./controller/UploadChapterController');
+app.get('/addTextChapter',function(req,res){
+    res.render('addTextChapter',{})
+})
+app.post('/addTextChapter',urlencodedParser,UploadChapterController.addTextChapter)
 
 
 //===监听端口===
 var server = app.listen(8088,function(){
-    console.log('http://localhost:8088')
+    console.log('http://localhost:8088/addTextChapter')
 })

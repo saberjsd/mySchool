@@ -25,7 +25,7 @@ var app = new Vue({
         })
     },
     methods:{
-        cate1(item,index){
+        cate1:function(item,index){
             $(".guide-direction ul li").attr("class","");
             $(".guide-direction ul li a").css("color","black");
             $(".guide-direction ul li").css("color","black");
@@ -44,9 +44,13 @@ var app = new Vue({
                 this.cateMovie = res.data;
             })
         },
-        cate2(item,index){
-               $(".guide-direction ul li").attr("class","");
-               $(".guide-direction ul li a").css("color","black");
+        cate2:function(item,index){
+            if( $(".guide-direction ul li ").attr("class")!="undefined"){
+                $(".guide-direction ul li ").attr("class","");
+            }
+            $(".guide-direction ul li a").attr("class","");
+            $(".guide-direction ul li a").css("color","black");
+
             $(".guide-classify ul li").attr("class","");
             $(".guide-classify ul li a").css("color","black");
             $(".guide-classify ul li").css("color","black");
@@ -65,6 +69,7 @@ var app = new Vue({
                 console.log(res.data[0].cid);
                 that.id= res.data[0].cid;
             })
+            // var url1 = '/get'
 
         }
     }

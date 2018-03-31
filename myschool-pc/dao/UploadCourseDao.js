@@ -1,4 +1,4 @@
-function CourseDao(){
+function UploadCourseDao(){
     var connection;
     this.init=function () {
         //1，调用MySQL模块
@@ -31,8 +31,9 @@ function CourseDao(){
     }
     // 添加课程
     this.addCourse = function(bd,call){
-        var sql = "INSERT INTO course (firstID,secondID,title,description,creatTime) VALUES ("
-            +bd.firstID+","+bd.secondID+",'"+bd.title+"','"+bd.description+"','"+bd.creatTime+"')";
+        var sql = "INSERT INTO course (uid,firstID,secondID,title,description,logo,creatTime,isVideo) VALUES ("
+        +bd.uid+","+bd.firstID+","+bd.secondID+",'"
+        +bd.title+"','"+bd.description+"','"+bd.src+"','"+bd.creatTime+"',"+bd.isVideo+")";
         // console.log(sql)
         connection.query(sql,function (err, data) {
             call(err,data)
@@ -47,4 +48,4 @@ function CourseDao(){
 
 }
 
-module.exports=CourseDao;
+module.exports=UploadCourseDao;
