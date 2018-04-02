@@ -53,6 +53,8 @@
     background-color: #f20d0d;
     text-decoration:none;
     color: white;
+    border: none;
+    outline:none;
     border-radius: 15px;
     display: flex;
     align-items: center;

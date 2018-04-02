@@ -401,4 +401,8 @@
     margin-bottom: 5px;
 }
 
+.add-course,.add-chapter{
+    display: none;
+}
+
 

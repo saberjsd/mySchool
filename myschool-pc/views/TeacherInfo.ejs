@@ -4,13 +4,21 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/wangEditor-fullscreen-plugin.css">
+    <link rel="stylesheet" href="css/markDown.css">
+    <link rel="stylesheet" href="css/personalInfo.css">
+    <style>
+
+        #editor{min-height: 480px;}
+        #textChapter{min-height: 480px;}
+        .w-e-text-container{min-height: 400px}
+        #saveBtn{ width: 200px}
+    </style>
     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdn.bootcss.com/vue/2.4.4/vue.js"></script>
     <script src="https://cdn.bootcss.com/vue-resource/1.5.0/vue-resource.js"></script>
-    <link rel="stylesheet" href="css/personalInfo.css">
     <script class="resources library" src="/js/area.js" type="text/javascript"></script>
-    <script type="text/javascript">_init_area();</script>
 </head>
 <body>
 <%include loginedHeaderBlack.ejs%>
@@ -109,23 +117,19 @@
                 </div>
 
 
-
-
-
                 <div class="col-md-8">
 
                     <!--课程开始-->
-                    <div class="user-class">
+                    <div class="user-class" id="courseList">
                         <ul class="list-inline">
-                            <li class="action">最近学习</li>
-                            <li>我的收藏</li>
+                            <li class="action">我的课程</li>
                         </ul>
                         <hr>
                         <div class="user-class-content">
                             <div class="Course">
                                 <div class=" movie-list" v-for="(item,index) in collectionCourse" v-if="index%3==0">
                                     <div class="movie-list-box" >
-                                        <a href="../login.html">
+                                        <a :href="'courseitem?id='+item.id">
                                             <div class="movie-list-img">
                                                 <img src="https://img.mukewang.com/58cf6639000183f406000338-240-135.jpg" alt="" >
                                             </div>
@@ -139,7 +143,7 @@
                                     </div>
 
                                     <div class="movie-list-box"  v-if="collectionCourse[index+1]!=null">
-                                        <a href="../login.html">
+                                        <a :href="'courseitem?id='+collectionCourse[index+1].id">
                                             <div class="movie-list-img">
                                                 <img src="https://img.mukewang.com/58cf6639000183f406000338-240-135.jpg" alt="" >
                                             </div>
@@ -154,7 +158,7 @@
 
 
                                     <div class="movie-list-box" v-if="collectionCourse[index+2]!=null">
-                                        <a href="../login.html">
+                                        <a :href="'courseitem?id='+collectionCourse[index+2].id">
                                             <div class="movie-list-img">
                                                 <img src="https://img.mukewang.com/58cf6639000183f406000338-240-135.jpg" alt="" >
                                             </div>
@@ -169,12 +173,6 @@
 
                                 </div>
                             </div>
-
-
-
-
-
-
                         </div>
                     </div>
                     <!--课程结束-->
@@ -291,85 +289,155 @@
                     </div>
                     <!--个人信息结束-->
 
-        <!--教师招募开始-->
+                    <!--添加课程-->
+                    <div class="add-course">
+                        <div class="container">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3>添加课程</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <form class="form-horizontal" action="/addCourse" method="post" enctype="multipart/form-data" >
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">一级栏目</label>
+                                                <div class="col-sm-8">
+                                                    <select class="form-control" name="firstID" v-model="firstID">
+                                                        <option value="0">=请选择一级栏目=</option>
+                                                        <option  v-for="item in cate.cateMenu"
+                                                                 :value="item.cid">{{item.cid}}--{{item.catename}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">二级栏目</label>
+                                                <div class="col-sm-8">
+                                                    <select class="form-control"  name="secondID">
+                                                        <option value="0">=请选择二级栏目=</option>
+                                                        <option v-if="item.pid == firstID" v-for="item in cate.cateList"
+                                                                :value="item.cid" >{{item.cid}}--{{item.catename}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">课程类别</label>
+                                                <div class="col-sm-8">
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="isVideo" value="1" checked>
+                                                        视频
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="isVideo" value="0">
+                                                        文档
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">名称</label>
+                                                <div class="col-sm-8">
+                                                    <input name="title" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">课程封面</label>
+                                                <div class="col-sm-8">
+                                                    <input name="logo" type="file">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">简介</label>
+                                                <div class="col-sm-8">
+                                                    <textarea name="description" class="form-control" rows="5" ></textarea>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="center-block">
+                                                <div class="col-sm-2"></div>
+                                                <button type="reset" class="btn btn-danger btn-lg col-xs-12 col-sm-3">重置</button>
+                                                <div class="col-sm-2"></div>
+                                                <button type="submit" class="btn btn-success btn-lg col-xs-12 col-sm-3">保存</button>
+                                                <div class="col-sm-2"></div>
+                                            </div>
 
-        <div class="user-apply" v-if="isApply">
-
-                <div class="container">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3>添加课程</h3>
-                        </div>
-                        <div class="panel-body">
-                            <form class="form-horizontal" action="/addCourse" method="post" enctype="multipart/form-data" >
-                                <div class="form-group">
-                                    <label  class="col-sm-2 control-label">一级栏目</label>
-                                    <div class="col-sm-8">
-                                        <select class="form-control" name="firstID" v-model="firstID">
-                                            <option value="0">=请选择一级栏目=</option>
-                                            <option  v-for="item in cate.cateMenu"
-                                                     :value="item.cid">{{item.cid}}--{{item.catename}}</option>
-                                        </select>
+                                        </form>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label  class="col-sm-2 control-label">二级栏目</label>
-                                    <div class="col-sm-8">
-                                        <select class="form-control"  name="secondID">
-                                            <option value="0">=请选择二级栏目=</option>
-                                            <option v-if="item.pid == firstID" v-for="item in cate.cateList"
-                                                    :value="item.cid" >{{item.cid}}--{{item.catename}}</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label  class="col-sm-2 control-label">课程类别</label>
-                                    <div class="col-sm-8">
-                                        <label class="radio-inline">
-                                            <input type="radio" name="isVideo" value="1" checked>
-                                            视频
-                                        </label>
-                                        <label class="radio-inline">
-                                            <input type="radio" name="isVideo" value="0">
-                                            文档
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label  class="col-sm-2 control-label">名称</label>
-                                    <div class="col-sm-8">
-                                        <input name="title" type="text" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label  class="col-sm-2 control-label">课程封面</label>
-                                    <div class="col-sm-8">
-                                        <input name="logo" type="file">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label  class="col-sm-2 control-label">简介</label>
-                                    <div class="col-sm-8">
-                                        <textarea name="description" class="form-control" rows="5" ></textarea>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="center-block">
-                                    <div class="col-sm-2"></div>
-                                    <button type="reset" class="btn btn-danger btn-lg col-xs-12 col-sm-3">重置</button>
-                                    <div class="col-sm-2"></div>
-                                    <button type="submit" class="btn btn-success btn-lg col-xs-12 col-sm-3">保存</button>
-                                    <div class="col-sm-2"></div>
-                                </div>
-
-                            </form>
-                        </div>
+                            </div>
                     </div>
-                </div>
+                    <!--添加课程结束-->
+
+                    <!--添加章节开始-->
+                    <div class="add-chapter">
+
+                        <div class="container">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3>添加课程章节</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <form class="form-horizontal" action="/addChapter" method="post" onsubmit="return check()" enctype="multipart/form-data" >
+
+                                        <div class="form-group">
+                                            <label  class="col-sm-2 control-label">所属课程</label>
+                                            <div class="col-sm-8">
+                                                <select name="pid" class="form-control" v-model="courseID">
+                                                    <option value="0">=请选择所属课程=</option>
+                                                    <option v-for="(item1,index) in collectionCourse" :value="item1.id">{{item1.title}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label  class="col-sm-2 control-label">章节标题</label>
+                                            <div class="col-sm-8">
+                                                <input name="title" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label  class="col-sm-2 control-label">章节顺序</label>
+                                            <div class="col-sm-8">
+                                                <input name="order" type="number" class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div >
+
+                                        </div>
 
 
-        </div>
-        <!--讲师招募结束-->
+                                        <!--文章课程-->
+                                        <div id="textChapter" v-show="!isVideo[courseID]">
+                                            <input type="hidden" name="content" id="editorInput">
+
+                                            <div id="editor" class="col-sm-12">
+                                                <!--这里是富文本编辑器的内容-->
+                                            </div>
+                                        </div>
+
+                                        <!--视频课程-->
+                                        <div id="videoChapter" v-if="isVideo[courseID]">
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">视频</label>
+                                                <div class="col-sm-8">
+                                                    <input name="content" type="file" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <hr>
+
+                                        <button type="submit" id="saveBtn" class="btn btn-success btn-lg center-block">保存</button>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--添加章结束-->
+
+
 
                 </div>
                 <div class="col-md-1"></div>
@@ -379,19 +447,24 @@
 </div>
 </div>
 <script type="text/javascript">_init_area();</script>
+
 <script>
     var dat2=[
         {
             sc:"/images/课程.png",
-            title:"课程"
+            title:"我的课程"
         },
         {
             sc:"/images/个人.png",
-            title:"设置"
+            title:"个人设置"
         },
         {
             sc:"/images/申请权限.png",
-            title:"上传"
+            title:"添加课程"
+        },
+        {
+            sc:"/images/申请权限.png",
+            title:"添加章节"
         }
     ];
     var app = new Vue({
@@ -406,22 +479,25 @@
             isApply:true,
             occupation:'',
             flag:true,
-
             firstID:0,
             secondID:0,
-            cate:null
+            cate:{
+                cateMenu:[],
+                cateList:[]
+            },
+            courseID:0,
+            isVideo:{}
         },
         mounted:function () {
             this.$http.get("/getCourseMenu").then(function (res) {
-                console.log(res.data)
+                // console.log(res.data)
                 this.cate = res.data;
             })
-
 
             this.$nextTick(function () {
                 this.$http.get("/getuserInfo").then(function (res) {
                     this.personalInfo = res.data;
-                    console.log( this.personalInfo[0].role)
+                    // console.log( this.personalInfo[0].role)
                     this.occupation =this.personalInfo[0].position;
                     switch( this.occupation){
                         case 'undefined':
@@ -467,11 +543,13 @@
 
                 })
             });
-            this.$nextTick(function () {
-                this.$http.get("/getusercollection").then(function (res) {
-                    this.collectionCourse = res.data;
-                })
+
+            this.$http.post("/getMyCourse").then(function (res) {
+                console.log(res.data)
+                this.collectionCourse = res.data.myCourse;
+                this.isVideo = res.data.isVideo;
             })
+
         },
         methods:{
             sendphoto:function () {
@@ -495,58 +573,61 @@
 
             },
             choiceMenu2:function(item,index) {
-                this.menu2[1].sc ="/images/个人.png";
                 this.menu2[0].sc ="/images/课程.png";
+                this.menu2[1].sc ="/images/个人.png";
                 this.menu2[2].sc ="/images/申请权限.png";
+
                 $(".user-class").css("display","none");
                 $(".user-setting").css("display","none");
-                $(".applyinfo ").css("display","none");
-                $(".user-apply").css("display","none");
+                $(".add-course").css("display","none");
+                $(".add-chapter").css("display","none");
                 $("#lists li").attr("class","");
                 $("#lists li:eq("+index+")").attr("class","active");
                 if(index == 1){
                     $(".user-setting").css("display","block");
-                    console.log(this.menu2[1]);
                     this.menu2[1].sc ="/images/个人1.png";
                 }else if(index == 2){
-                    $(".user-apply").css("display","block");
+                    $(".add-course").css("display","block");
                     this.menu2[2].sc ="/images/申请权限1.png";
+                }else if(index == 3){
+                    $(".add-chapter").css("display","block");
+                    this.menu2[3].sc ="/images/申请权限1.png";
                 }else{
                     $(".user-class").css("display","block");
                     this.menu2[0].sc ="/images/课程1.png";
                 }
-            },
-            inspect:function () {
-                console.log(11111);
-                this.$http.get("/inspectApplyInfo").then(function (res) {
-                    console.log(res.data);
-                    if(res.data == 'apply-success'){
-                        this.isApply = false;
-                        $(".user-apply").css("display","none");
-                        $(".applyinfo ").css("display","block");
-//                          this.isTeacher=false;
-                    }else if(res.data == 'Application'){
-                        this.isApply = false;
-                        $(".user-apply").css("display","none");
-                        $(".applyinfo ").css("display","block");
-                        $(".applyinfo .cont").html("正在审核，请耐心等待。。。");
-                    }else if(res.data == 'please'){
-
-                    }
-                })
             }
+
         }
     })
 
-    var Gid  = document.getElementById ;
+
+
+</script>
+<script>
+    var Gid  = document.getElementById;
     var showArea = function(){
         Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" +
             Gid('s_city').value + " - 县/区" +
             Gid('s_county').value + "</h3>"
     }
     Gid('s_county').setAttribute('onchange','showArea()');
-
 </script>
 
 </body>
 </html>
+
+<script type="text/javascript" src="lib/wangEditor.min.js"></script>
+<script src="lib/wangEditor-fullscreen-plugin.js"></script>
+<script>
+    var E = window.wangEditor
+    var editor = new E('#editor')
+    // 或者 var editor = new E( document.getElementById('editor') )
+    editor.create()
+
+    E.fullscreen.init('#editor')
+    function check(){
+        $('#editorInput').val(editor.txt.html())
+        return true;
+    }
+</script>

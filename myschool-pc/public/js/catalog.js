@@ -17,3 +17,18 @@ for(var i=0;i<btn.length;i++){
         }
     )(i)
 }
+$('.list_box').on('click','.fabulous',function () {
+    var that=this;
+    var id = $(that).children(":first").html();
+    //console.log(id);
+    var zan = $(that).children().last().html()-1+2;
+    console.log(zan)
+    $.ajax({
+        url:'/zan',
+        type:'GET',
+        data:{comid:id,zid:zan}
+    }).done(function (data) {
+        console.log(data);
+        $(that).children().last().html(zan)
+        })
+})

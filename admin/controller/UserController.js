@@ -10,14 +10,15 @@ var totalPage =0;
 // 当前页面
 var page = 1;
 // 每页显示数目
-var pageNum = 2;
+var pageNum = 5;
+// limit起始范围
 var limit = 0;
 // 每次显示分页数
 var totalShow = 5;
 
 exports.userList = function (req, res) {
-    console.log(req.query)
-    // if(req.query.page)
+    // console.log(req.query)
+
     page = req.query.page || 1;
 
     // limit的值
@@ -46,8 +47,8 @@ exports.userList = function (req, res) {
             }
             data.totalPage = totalPage;
             data.pageNow = page;
-            console.log('Page:'+page)
-            console.log('totalPage:'+totalPage)
+            // console.log('Page:'+page)
+            // console.log('totalPage:'+totalPage)
             data.start = start;
             data.end = end;
             // console.log(data)

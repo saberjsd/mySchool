@@ -9,6 +9,7 @@ var dao = new UploadCourseDao();
 dao.init();
 
 exports.getCourseMenu = function (req, res) {
+    // console.log(req.body)
     dao.getCourseMenu(function (err1,data) {
         if(!err1){
             var result = JSON.stringify(data);
@@ -50,18 +51,29 @@ exports.addCourse = function (req, res) {
             }
 
         })
-        fields.uid = 1;
+        fields.uid = req.session.uid;
         fields.src = '/upload/courseLogo/'+t+ran+extname;
         fields.creatTime = new Date().toLocaleString();
 
         // console.log(fields)
         dao.addCourse(fields,function (err,data) {
             if(!err){
-                res.redirect('/addCourse')
+                res.redirect('/TeacherInfo#courseList')
             }
         })
     });
 
 
+};
+
+exports.getMyCourse = function (req, res) {
+    var uid = req.session.uid;
+    console.log(uid)
+    dao.getMyCourse(uid,function (err,data) {
+        if(!err){
+            var result = JSON.stringify(data);
+            res.send(result)
+        }
+    })
 
 };

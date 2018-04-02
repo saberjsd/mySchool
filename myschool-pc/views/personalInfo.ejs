@@ -129,7 +129,7 @@
                             <div class="Course">
                                 <div class=" movie-list" v-for="(item,index) in collectionCourse" v-if="index%3==0">
                                     <div class="movie-list-box" >
-                                        <a href="../login.html">
+                                        <a  :href="'/courseitem?id='+item.id" :id="item.id">
                                             <div class="movie-list-img">
                                                 <img src="https://img.mukewang.com/58cf6639000183f406000338-240-135.jpg" alt="" >
                                             </div>
@@ -314,7 +314,7 @@
                         <div class="col-md-1"></div>
                         <span class="col-md-1"><img src="/images/星号.png" alt="">我的电话</span>
                         <div class="col-md-4">
-                            <input type="number" name="tel" class="col-md-12" :value="personalInfo[0].username">
+                            <input type="number" name="tel" class="col-md-12" >
                             <small>MySchool网站将获得你的电话</small>
                         </div>
                     </div>

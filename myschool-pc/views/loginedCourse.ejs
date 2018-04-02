@@ -58,7 +58,7 @@
                     <div class="contents">
                         <div class="col-md-12 content-list" v-for="(item,index) in cateMovie" v-if="index%5==0">
                             <div class="content-list-box" >
-                                <a href="../login.html">
+                                <a  :href="'/courseitem?id='+item.id" :id="item.id">
                                     <div class="content-list-img">
                                         <img src="https://img.mukewang.com/58cf6639000183f406000338-240-135.jpg" alt="" class="listcontent-img">
                                     </div>
@@ -72,7 +72,7 @@
                             </div>
 
                             <div class="content-list-box" v-if="cateMovie[index+1]!=null">
-                                <a href="../login.html">
+                                <a  :href="'/courseitem?id='+item.id" :id="item.id">
                                     <div class="content-list-img">
                                         <img src="https://img.mukewang.com/58cf6639000183f406000338-240-135.jpg" alt="" class="listcontent-img">
                                     </div>
@@ -86,7 +86,7 @@
                             </div>
 
                             <div class="content-list-box" v-if="cateMovie[index+2]!=null">
-                                <a href="../login.html">
+                                <a  :href="'/courseitem?id='+item.id" :id="item.id">
                                     <div class="content-list-img">
                                         <img src="https://img.mukewang.com/58cf6639000183f406000338-240-135.jpg" alt="" class="listcontent-img">
                                     </div>
@@ -100,7 +100,7 @@
                             </div>
 
                             <div class="content-list-box" v-if="cateMovie[index+3]!=null">
-                                <a href="../login.html">
+                                <a  :href="'/courseitem?id='+item.id" :id="item.id">
                                     <div class="content-list-img">
                                         <img src="https://img.mukewang.com/58cf6639000183f406000338-240-135.jpg" alt="" class="listcontent-img">
                                     </div>
@@ -114,7 +114,7 @@
                             </div>
 
                             <div class="content-list-box" v-if="cateMovie[index+4]!=null">
-                                <a href="../login.html">
+                                <a  :href="'/courseitem?id='+item.id" :id="item.id">
                                     <div class="content-list-img">
                                         <img src="https://img.mukewang.com/58cf6639000183f406000338-240-135.jpg" alt="" class="listcontent-img">
                                     </div>

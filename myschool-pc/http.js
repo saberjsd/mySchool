@@ -26,6 +26,7 @@ app.get('/login',function (req,res) {
 
 var LoginController = require('./controller/LoginController');
 app.get("/list",LoginController.list);//登录页面数据处理开始。。。。。
+app.get("/checkName",LoginController.checkName);//检查用户名是否存在
 app.get("/getuserInfo",LoginController.getuserInfo);//获取用户信息开始。。。。。
 app.get("/getusercollection",LoginController.getusercollection);
 app.get("/StoringUserinfo",LoginController.StoringUserinfo);//注册用户信息开始。。。。。
@@ -69,24 +70,23 @@ app.get("/getVideoCourseA",vedioCourseController.getVideoCourseList);
 app.get('/personalInfo',function (req,res) {
     res.render('personalInfo',{})
 })
+app.get('/TeacherInfo',function (req,res) {
+    res.render('TeacherInfo',{})
+})
 //个人用户页面结束。。。。
 
 
 var UploadCourseController = require('./controller/UploadCourseController');
-app.get('/addCourse',function(req,res){
-    res.render('uploadCourse',{})
-})
 // 获取栏目列表
 app.get('/getCourseMenu',UploadCourseController.getCourseMenu)
 //上传课程处理
 app.post('/addCourse',urlencodedParser,UploadCourseController.addCourse)
+app.post('/getMyCourse',urlencodedParser,UploadCourseController.getMyCourse)
 
 //上传课程章节
 var UploadChapterController = require('./controller/UploadChapterController');
-app.get('/addTextChapter',function(req,res){
-    res.render('addTextChapter',{})
-})
-app.post('/addTextChapter',urlencodedParser,UploadChapterController.addTextChapter)
+
+app.post('/addChapter',UploadChapterController.addChapter)
 
 
 var server = app.listen(8088, function() {

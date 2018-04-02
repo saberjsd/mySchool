@@ -21,8 +21,8 @@ exports.index=function (req,res) {
     // res.render("index",{})
 };
 exports.loginedIndex = function (req,res) {
-    console.log(req.session.username);
-    if(req.session.username !=undefined && req.session.passwd !=undefined){
+    // console.log(req.session.username);
+    if(req.session.username !=undefined){
         dao.newest("course",function (err,data) {
             var data = JSON.stringify(data);
             res.render("loginedIndex",{})

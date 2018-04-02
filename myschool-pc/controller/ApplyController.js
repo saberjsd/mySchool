@@ -14,6 +14,7 @@ exports.applyInfo = function (req,res) {
 }
 exports.inspectApplyInfo = function (req,res) {
     var uid = req.session.uid;
+    console.log(uid);
     dao.getapplyInfo(uid,function(err,data){
         if(data[0].status == 0){
             res.send('Application');

@@ -1,15 +1,19 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.js"></script>
     <script src="https://cdn.bootcss.com/vue-resource/1.5.0/vue-resource.js"></script>
     <% course1.forEach(function (course1) { %>
     <title><%= course1.title%></title>
     <link href="css/catalog.css" type="text/css" rel="stylesheet">
-
 </head>
 <body>
+<%include loginedHeaderBlack.ejs%>
 <div class="head">
     <div class="head_box">
         <!--<div class="title_catalog">
@@ -18,7 +22,7 @@
         <div class="title"><%= course1.title%></div>
         <div class="start">
         <div class="start_learning">
-            <a class="btn1" href="#">开始学习</a>
+            <a class="btn1" href="videotext">开始学习</a>
             <div class="course_introduction">
                  <div class="number">
                      <p>学习人数</p>
@@ -71,7 +75,7 @@
                 <h3>课程介绍</h3>
             </div>
             <% courseitem.forEach(function (list) { %>
-            <a href="video22?id=<%= list.id%>" class="course_section">
+            <a href="video22?id=<%= list.order%>" class="course_section">
                 <div class="course_title">
                     <div class="arrow">
                     <img src="images/右箭头.png">
@@ -101,6 +105,7 @@
                         <div class="zan">
                             <span>举报</span>
                             <div class="fabulous">
+                                <span class="commentid" style="display: none"><%= comment.id%></span>
                                 <div>
                                     <img src="images/赞.png">
                                 </div>
@@ -120,7 +125,7 @@
             <% userinfoSingle.forEach(function (userinfoSingle) {%>
             <img src="images/head.jpg">
             <div class="teacher_info">
-                <h4><%= userinfoSingle.username%></h4>
+                <h4><%= userinfoSingle.nickname%></h4>
                 <span><%= userinfoSingle.position%></span>
             </div>
         </div>

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <title>Title</title>
     <link href="css/video.css" type="text/css" rel="stylesheet">
 </head>
@@ -16,11 +17,15 @@
     <div class="comment">
         <div class="comment_title">评论</div>
         <div class="comment_text">
+            <form method="post" action="form" id="myform">
             <div class="head_and_input">
                 <img src="images/默认头像.png">
-                <input class="comment_input" placeholder="扯淡、吐槽、表扬、鼓励...想说啥就说啥">
+                <input name='content' class="comment_input" placeholder="扯淡、吐槽、表扬、鼓励...想说啥就说啥">
+                <input name="uid" value="<%= uid %>" style="display: none">
+                <input name="cid" value="<%= cid %>" style="display: none">
+                <input name="tid" value="<%= tid %>" style="display: none">
             </div>
-            <button class="comment_btn">发表评论</button>
+            <button class="comment_btn" type="submit">发表评论</button></form>
         </div>
     </div>
     <div class="list_box">
@@ -38,6 +43,7 @@
                     <div class="zan">
                         <span>举报</span>
                         <div class="fabulous">
+                            <span class="commentid" style="display: none"><%= cid%></span>
                             <div>
                                 <img src="images/赞.png">
                             </div>
@@ -76,4 +82,5 @@
     </div>
 </div>
 </body>
+<script src="js/catalog.js"></script>
 </html>

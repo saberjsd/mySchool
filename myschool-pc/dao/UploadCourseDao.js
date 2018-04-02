@@ -40,6 +40,22 @@ function UploadCourseDao(){
         });
     }
 
+    //获取我的课程
+    this.getMyCourse = function(uid,call){
+        var result = {}
+        var isVideo={}
+        var sql = "SELECT * FROM course WHERE status = 1 AND uid="+uid;
+        // console.log(sql)
+        connection.query(sql,function (err, data) {
+            result.myCourse = data;
+            data.forEach(function(item){
+                isVideo[item.id] = !!item.isVideo
+            })
+            result.isVideo = isVideo;
+            call(err,result)
+        });
+    }
+
 
 
     this.end=function () {

@@ -8,6 +8,7 @@
     background-color:#07111b;
     align-content: center;
     outline: none;
+    border: none!important;
 }
 .navbar-header a{
     margin-left: 10px;

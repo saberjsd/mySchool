@@ -47,7 +47,7 @@
                     <div class="movies">
                         <div class="col-md-12 movie-list" v-for="(item,index) in vedioCourse" v-if="index%4==0">
                             <div class="movie-list-box" >
-                                <a href="../login.html">
+                                <a  :href="'/courseitem?id='+item.id" :id="item.id">
                                     <div class="movie-list-img">
                                         <img src="https://img.mukewang.com/58cf6639000183f406000338-240-135.jpg" alt="" >
                                     </div>

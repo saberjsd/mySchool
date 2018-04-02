@@ -30,6 +30,7 @@ function ApplyDao() {
 
     this.getapplyInfo =function (uid,call) {
         var  userGetSql = 'SELECT * FROM application WHERE uid='+uid;
+        console.log(userGetSql);
         connection.query(userGetSql,function (err, result) {
             if(err){
                 console.log('查询申请的状态',err.message);
