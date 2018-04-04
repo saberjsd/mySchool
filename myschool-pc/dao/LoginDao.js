@@ -50,7 +50,7 @@ function LoginDao() {
 
     this.userInfoList=function (username,user,call) {
         var  userGetSql = "SELECT * FROM "+user+" WHERE username = "+username;
-        console.log(userGetSql)
+        // console.log(userGetSql)
         connection.query(userGetSql,function (err, result) {
             if(err){
                 console.log('用户查信息询',err.message);

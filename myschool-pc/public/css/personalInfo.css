@@ -162,6 +162,9 @@
     color: #93999f;
     border: hidden;
 }
+.user-content{
+    min-height:600px;
+}
 
 .user-setting .set{
     font-size: 15px;

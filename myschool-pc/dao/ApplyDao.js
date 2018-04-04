@@ -22,7 +22,7 @@ function ApplyDao() {
 
     this.StoringapplyInfo = function (uid,reason,realName,tel,username,call) {
         var sql = 'INSERT INTO application(uid,reason,realName,tel,username) VALUES ('+uid+',"'+reason+'","'+realName+'","'+tel+'","'+username+'")';
-        console.log(sql)
+        // console.log(sql)
         connection.query(sql,function (err, result) {
             call(err, result);
         });
@@ -30,7 +30,7 @@ function ApplyDao() {
 
     this.getapplyInfo =function (uid,call) {
         var  userGetSql = 'SELECT status FROM application WHERE uid='+uid;
-        console.log(userGetSql);
+        // console.log(userGetSql);
         connection.query(userGetSql,function (err, result) {
             if(err){
                 console.log('查询申请的状态',err.message);
@@ -43,7 +43,7 @@ function ApplyDao() {
     this.updataapplyInfo=function(uid,call) {
         //4,编写sql语句
         var userModSql = 'UPDATE userinfo SET role =1 WHERE uid='+uid;
-        console.log(userModSql);
+        // console.log(userModSql);
         //5，更新操作
         connection.query(userModSql,function (err, result) {
             if(err){

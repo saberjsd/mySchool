@@ -24,7 +24,7 @@ function CourseypDao() {
 
     this.queryCommentUser = function (call) {
         var userGetSql = 'SELECT * FROM comment left join userinfo on comment.uid = userinfo.uid WHERE comment.status =1';
-        console.log(userGetSql);
+        // console.log(userGetSql);
         connection.query(userGetSql,function (err,result) {
             if(err){
                 console.log('评论'+err.message);
