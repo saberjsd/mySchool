@@ -130,13 +130,12 @@
                 }else if(ret.test(str)){
                     $(".register .remindUsername").html('');
                     var username =this.userInfo.username.toString();
-//                 var passwd = this.userInfo.passwd.toString();
-                    var url = "/list?username="+username;
+                    var url = "/checkName?username="+username;
                     this.$http.get(url).then(function (res) {
-                        console.log(res.data);
-                        if( res.data == 'username-err'){
+                        // console.log(res.data);
+                        if( res.data == 'username-ok'){
                             //开始存储数据
-                        }else if(res.data == 'passwd-err'){
+                        }else if(res.data == 'username-err'){
                             $(".register .remindUsername").html("该用户已被使用");
                         }
                     })

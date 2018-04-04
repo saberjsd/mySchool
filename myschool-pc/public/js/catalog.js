@@ -29,6 +29,7 @@ $('.list_box').on('click','.fabulous',function () {
         data:{comid:id,zid:zan}
     }).done(function (data) {
         console.log(data);
-        $(that).children().last().html(zan)
+        $(that).children().last().html(zan);
+        $(that).children().last().prev().attr('src','images/zan2.png')
         })
 })

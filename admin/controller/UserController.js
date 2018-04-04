@@ -93,3 +93,53 @@ exports.delUser = function (req, res) {
 
 };
 
+// 处理用户申请
+exports.userApply = function (req, res) {
+    var result = {}
+    dao.userApply(function (err,data) {
+        if(!err){
+            result.pageMenu = 'userInfo';
+            result.page = 'userApply';
+            result.apply = data;
+            res.render('userApply',result)
+        }
+    })
+
+};
+// 根据uid获取
+exports.getApply = function (req, res) {
+    dao.getApply(req.query.uid,function (err,data) {
+        if(!err){
+            // console.log(data)
+            data = JSON.stringify(data[0])
+            // console.log(data)
+            res.send(data)
+        }
+    })
+
+};
+//同意
+exports.setApply = function (req, res) {
+    var result = {}
+    dao.setApply(req.body.uid,function (err,data) {
+        if(!err){
+            result.pageMenu = 'userInfo';
+            result.page = 'userApply';
+            result.apply = data;
+            res.render('userApply',result)
+        }
+    })
+
+};
+
+//查询条数
+exports.applyCount = function (req, res) {
+    dao.applyCount(function (err,data) {
+        if(!err){
+            data = JSON.stringify(data[0])
+            // console.log(data)
+            res.send(data)
+        }
+    })
+
+};

@@ -9,7 +9,7 @@ var totalPage =0;
 // 当前页面
 var page = 1;
 // 每页显示数目
-var pageNum = 2;
+var pageNum = 5;
 var limit = (page-1)*pageNum;
 // 每次显示分页数
 var totalShow = 5;

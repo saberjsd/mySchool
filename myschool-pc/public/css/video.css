@@ -4,6 +4,7 @@
 }
 .window{
     width: 100%;
+    margin-top: 40px;
 }
 .video{
     width: 100%;
@@ -17,7 +18,7 @@
 }
 .frame_box{
     width: 1000px;
-    background-color: aqua;
+    /*background-color: aqua;*/
     margin: 0 auto;
 }
 .comment{

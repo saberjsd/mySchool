@@ -9,11 +9,14 @@
         z-index: 100;top: 0;left: 0;display: none;}
     #updatePanel,#updatePane2{margin-top: 150px;}
     .add-chapter{float: right;margin-right: 9%}
+
+    .courseTitle span,.courseDes span{display: inline-block;width: 100px;height: 18px;overflow: hidden;}
+    .courseDes{width: 400px;}
+    .courseDes span{width: 300px;white-space:nowrap;text-overflow:ellipsis;}
 </style>
 <section id="main-content" ng-app="main-content" ng-controller="controller1">
     <section class="wrapper">
         <h3><i class="fa fa-angle-right"></i><%course.title%></h3>
-
 
         <div class="row mt">
             <div class="col-md-12">
@@ -42,11 +45,11 @@
                         <tr>
                             <td><span class="label label-info label-mini cid"><%=itemList.id%></span></td>
                             <td><%=itemList.pid%></td>
-                            <td><%=itemList.title%></td>
-                            <td class="courseTitle">
+                            <td class="courseTitle"><%=itemList.title%></td>
+                            <td class="courseDes">
                                 <span><%=itemList.content%></span>
                             </td>
-                            <td class="courseDes">
+                            <td >
                                 <span><%=itemList.order%></span>
                             </td>
                             <td>

@@ -92,6 +92,9 @@
     margin-top: 50px;
     margin-bottom: 140px;
 }
+.content{
+    margin-bottom: 100px;
+}
 .movie-list{
     margin-top: 10px;
     display: flex;

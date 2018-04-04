@@ -13,7 +13,7 @@ function VdoTextDao() {
     };
     //查询评论表关联用户表
     this.queryCommentUser = function (cid,call) {
-        var userGetSql = 'SELECT * FROM comment left join userinfo on comment.uid = userinfo.uid WHERE status =1 AND comment.cid = '+cid;
+        var userGetSql = 'SELECT * FROM comment left join userinfo on comment.uid = userinfo.uid WHERE comment.status =1 AND comment.cid = '+cid;
         connection.query(userGetSql,function (err,result) {
             if(err){
                 console.log('[INSERT ERROR] - ',err.message);

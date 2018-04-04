@@ -89,6 +89,25 @@ var UploadChapterController = require('./controller/UploadChapterController');
 app.post('/addChapter',UploadChapterController.addChapter)
 
 
+
+//课程章节详情页
+var courseypController = require('./controller/CourseypController');
+app.get('/courseitem',courseypController.courseyp);
+
+//视频播放页面和文章展示
+var videoController = require('./controller/VideoTextController');
+app.get('/video22',videoController.video22);
+app.get('/videotext',videoController.videotext);
+
+//发表评论
+var formController = require('./controller/FormController');
+app.post('/form',urlencodedParser,formController.form);
+
+//点赞
+var zanController = require('./controller/ZanController');
+app.get('/zan',zanController.zan);
+
+
 var server = app.listen(8088, function() {
     console.log("请在浏览器访问：http://localhost:8088/");
 });

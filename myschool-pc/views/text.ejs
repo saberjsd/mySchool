@@ -5,14 +5,20 @@
     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <title>Title</title>
     <link href="css/video.css" type="text/css" rel="stylesheet">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.js"></script>
+    <script src="https://cdn.bootcss.com/vue-resource/1.5.0/vue-resource.js"></script>
+    <link rel="stylesheet" href="css/markDown.css">
 </head>
+<%include loginedHeaderBlack.ejs%>
 <body>
 <div class="window">
     <!--<div class="video">
         <video src="../public/video/movie.mp4" autoplay controls></video>
     </div>-->
     <div class="frame_box">
-        <%= cateMovieAll[0].content%>
+        <%- cateMovieAll[0].content%>
     </div>
     <div class="comment">
         <div class="comment_title">评论</div>
@@ -57,31 +63,7 @@
 
     </div>
 </div>
-<div class="foot">
-    <div class="foot_box">
-        <div class="foot_left">
-            <div class="enterprise_nav">
-                <ul class="enterprise_ul">
-                    <li>网站首页</li>
-                    <li>企业合作</li>
-                    <li>人才招聘</li>
-                    <li>联系我们</li>
-                    <li>讲师招募</li>
-                    <li>常见问题</li>
-                    <li>意见反馈</li>
-                    <li>幕课大学</li>
-                    <li>友情链接</li>
-                </ul>
-            </div>
-            <p>Copyright © 2018 imooc.com All Rights Reserved | 京ICP备 12003892号-11</p>
-        </div>
-        <div class="foot_right">
-            <div class="foot_icon"><img src="images/wx背景透明.png"></div>
-            <div class="foot_icon"><img src="images/新浪.png"></div>
-            <div class="foot_icon"><img src="images/qq背景透明.png"></div>
-        </div>
-    </div>
-</div>
+<%include footer.ejs%>
 </body>
 <script src="js/catalog.js"></script>
 </html>

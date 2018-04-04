@@ -156,6 +156,54 @@ function UserDao() {
         });
     }
 
+    // 处理申请
+    this.userApply=function (call) {
+        //查询申请表
+        var sql = 'SELECT * FROM application WHERE status=0';
+        // console.log(sql)
+        connection.query(sql,function (err, data) {
+            call(err, data);
+        });
+    }
+
+    this.getApply=function (uid,call) {
+        //查询单个
+        var sql = 'SELECT * FROM application WHERE status=0 AND uid='+uid;
+        // console.log(sql)
+        connection.query(sql,function (err, data) {
+            call(err, data);
+        });
+    }
+
+    //同意
+    this.setApply=function (uid,call) {
+        //处理
+        var sql1 = "UPDATE userinfo SET role=1 WHERE uid="+uid;
+        connection.query(sql1,function (err, data) {
+
+        });
+        var sql2 = "UPDATE application SET status=1 WHERE uid="+uid;
+        console.log(sql2)
+        connection.query(sql2,function (err1, data1) {
+            //查询申请表
+            var sql = 'SELECT * FROM application WHERE status=0';
+            // console.log(sql)
+            connection.query(sql,function (err, data) {
+                call(err, data);
+            });
+        });
+
+    }
+
+    this.applyCount=function (call) {
+        //查询申请表
+        var sql = 'SELECT count(uid) AS applyCount FROM application WHERE status=0';
+        // console.log(sql)
+        connection.query(sql,function (err, data) {
+            call(err, data);
+        });
+    }
+
 
 
     this.end=function () {

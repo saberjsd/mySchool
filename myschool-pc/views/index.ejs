@@ -86,7 +86,7 @@
                                 <div class="listcontent-box">
                                     <a href="/">
                                         <div class="listcontent-box-img">
-                                        <img src="https://img1.ph.126.net/l-Jh_6z7Lj2KXonhbGxlkA==/2505690242696330791.jpg" alt="" class="listcontent-img">
+                                        <img :src="item.logo" alt="" class="listcontent-img">
                                         </div>
                                         <h4>
                                             {{item.title}}
@@ -178,7 +178,7 @@
                                          <div class="middle-content-list"  v-for="item in log1">
                                          <a href="">
                                              <div class="middle-content-img">
-                                                 <img src="https://img3.sycdn.imooc.com/szimg/5a308c9400011c1305400300.jpg" alt="">
+                                                 <img :src="item.logo" alt="">
                                              </div>
                                              <h4>{{item.title}}</h4>
                                          </a>
@@ -193,7 +193,7 @@
                                         <div class="middle-content-list"  v-for="item in log2">
                                                 <a href="">
                                                     <div class="middle-content-img">
-                                                            <img src="https://img3.sycdn.imooc.com/szimg/5a308c9400011c1305400300.jpg" alt="">
+                                                            <img :src="item.logo" alt="">
                                                     </div>
                                                     <h4>{{item.title}}</h4>
                                                 </a>
@@ -239,7 +239,7 @@
                                 <div class="note-title">
                                     <div class="l"><h4>{{item.title}}</h4></div>
                                     <div class="note-img">
-                                        <img src="https://img.mukewang.com/5aaf4f040001cf2304000400-210-130.jpg" alt="">
+                                        <img :src="item.logo" alt="">
                                     </div>
                                 </div>
                                 <div class="note-text">
@@ -348,6 +348,7 @@
         <!--底部老师卡片结束-->
     </div>
     </div>
+<%include footer.ejs%>
 
 <script src="js/index.js"></script>
 <script src="js/indexStyle.js" ></script>

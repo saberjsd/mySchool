@@ -11,7 +11,7 @@ exports.course = function (req,res) {
     })
 }
 exports.loginedCourse = function (req,res) {
-    if(req.session.username!=undefined && req.session.passwd!=undefined){
+    if(req.session.username!=undefined){
         dao.cateMenuAll("cate",function (err,data) {
             var data = JSON.stringify(data);
         })

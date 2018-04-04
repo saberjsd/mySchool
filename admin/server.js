@@ -104,7 +104,12 @@ app.get('/resetPwd',UserController.resetPwd);
 // 修改状态
 app.post('/setUserInfo',urlencodedParser,UserController.setUserInfo);
 //删除
-app.get('/delUser',UserController.delUser)
+app.get('/delUser',UserController.delUser);
+// 用户申请
+app.get('/userApply',UserController.userApply);
+app.get('/applyCount',UserController.applyCount);
+app.get('/getApply',UserController.getApply);
+app.post('/setApply',urlencodedParser,UserController.setApply);
 
 //===监听端口===
 var server = app.listen(8080,function(){

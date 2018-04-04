@@ -20,8 +20,8 @@ function ApplyDao() {
         connection.connect();
     }
 
-    this.StoringapplyInfo = function (uid,reason,realName,tel,call) {
-        var sql = 'INSERT INTO application(uid,reason,realName,tel) VALUES ('+uid+',"'+reason+'","'+realName+'","'+tel+'")';
+    this.StoringapplyInfo = function (uid,reason,realName,tel,username,call) {
+        var sql = 'INSERT INTO application(uid,reason,realName,tel,username) VALUES ('+uid+',"'+reason+'","'+realName+'","'+tel+'","'+username+'")';
         console.log(sql)
         connection.query(sql,function (err, result) {
             call(err, result);
@@ -29,7 +29,7 @@ function ApplyDao() {
     }
 
     this.getapplyInfo =function (uid,call) {
-        var  userGetSql = 'SELECT * FROM application WHERE uid='+uid;
+        var  userGetSql = 'SELECT status FROM application WHERE uid='+uid;
         console.log(userGetSql);
         connection.query(userGetSql,function (err, result) {
             if(err){

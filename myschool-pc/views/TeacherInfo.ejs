@@ -446,6 +446,7 @@
     </div>
 </div>
 </div>
+<%include footer.ejs%>
 <script type="text/javascript">_init_area();</script>
 
 <script>
@@ -575,7 +576,8 @@
             choiceMenu2:function(item,index) {
                 this.menu2[0].sc ="/images/课程.png";
                 this.menu2[1].sc ="/images/个人.png";
-                this.menu2[2].sc ="/images/申请权限.png";
+                this.menu2[2].sc ="/images/class.png";
+                this.menu2[3].sc ="/images/kaifa.png";
 
                 $(".user-class").css("display","none");
                 $(".user-setting").css("display","none");
@@ -588,10 +590,10 @@
                     this.menu2[1].sc ="/images/个人1.png";
                 }else if(index == 2){
                     $(".add-course").css("display","block");
-                    this.menu2[2].sc ="/images/申请权限1.png";
+                    this.menu2[2].sc ="/images/class1.png";
                 }else if(index == 3){
                     $(".add-chapter").css("display","block");
-                    this.menu2[3].sc ="/images/申请权限1.png";
+                    this.menu2[3].sc ="/images/kaifa1.png";
                 }else{
                     $(".user-class").css("display","block");
                     this.menu2[0].sc ="/images/课程1.png";
